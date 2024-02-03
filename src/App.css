@@ -1,0 +1,15 @@
+/* styles/App.css */
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  #root {
+    max-width: 100%; /* Full width on screens less than or equal to 768px */
+    padding: 1rem;
+  }
+}
