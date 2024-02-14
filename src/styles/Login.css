@@ -1,0 +1,18 @@
+.IDPWTextfield {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.SignupMessage {
+  margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+.SignupMessage a {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+}
+
+.toSignup {
+  margin-left: 215px;
+}
