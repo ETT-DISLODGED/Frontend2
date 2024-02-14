@@ -1,0 +1,172 @@
+.DetailPage {
+  color: white; /* 기본 글자 색상 */
+  position: fixed;
+  top: 20%; /* 화면의 정중앙부터 시작 */
+  bottom: 0; /* 아래쪽으로는 화면 끝까지 */
+  width: 100%;
+  font-family: "나눔고딕", sans-serif; /* 글씨체 */
+  text-align: center;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+
+.title,
+.etc {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.etc {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-bottom: 2px solid white;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail_author {
+  margin-left: 10px;
+  font-size: 23px;
+}
+
+.detail_commentNum {
+  margin-right: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.comment2 {
+  width: 24px; /* 이미지 크기 설정 */
+  height: auto; /* 이미지 비율 유지 */
+}
+
+.content {
+  width: 60%; /* 또는 원하는 너비 */
+  margin-left: auto;
+  margin-right: auto;
+  white-space: normal; /* 공백과 줄바꿈을 정상적으로 처리 */
+  word-wrap: break-word; /* 경계를 넘어가는 텍스트에서 자동 줄바꿈 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  padding: 10px 0; /* 위 아래 패딩 (선택적) */
+  font-size: 24px;
+  border-bottom: 2px solid white;
+  padding-bottom: 50px;
+  padding-top: 30px;
+  margin-top: 20px;
+}
+
+.detail_button {
+  text-align: left; /* 버튼을 왼쪽으로 정렬 */
+  padding-left: calc(
+    20% + 10px
+  ); /* DetailPage의 width가 60%이므로, (100% - 60%) / 2 + 10px 여백을 줌 */
+
+  padding-top: 20px;
+}
+
+.edit,
+.remove,
+.list {
+  /* 버튼 공통 스타일 */
+  /* ... 기존 스타일 ... */
+  margin-right: 10px; /* 버튼 사이의 간격을 위한 마진 */
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+/*댓글 입력 칸*/
+
+/* 댓글 입력란 전체 컨테이너 */
+.inputComment {
+  background-color: black; /* 배경 색상 */
+  padding: 20px; /* 내부 여백 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  margin-bottom: 20px; /* 하단 여백 */
+  color: #ffffff; /* 글자 색상 */
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputComment form {
+  display: flex; /* Flexbox 레이아웃 적용 */
+
+  align-items: center; /* 세로 방향 중앙 정렬 */
+}
+
+/* 사용자 닉네임 표시 */
+.userNickname {
+  font-weight: bold; /* 글자 굵기 */
+  margin-bottom: 10px; /* 닉네임과 입력란 사이 간격 */
+  text-align: left;
+}
+
+form {
+  text-align: left;
+}
+/* 텍스트 입력란 스타일링 */
+.writeComment {
+  flex: 9 1 0%;
+
+  width: 80%; /* 전체 너비 */
+  background-color: black; /* 입력란 배경 색상 */
+  border: 1px solid white; /* 테두리 제거 */
+  border-radius: 5px; /* 입력란 모서리 둥글게 */
+  padding: 10px; /* 입력란 내부 여백 */
+  color: #ffffff; /* 입력란 글자 색상 */
+  resize: vertical; /*textarea가 가로로는 늘어나지 않게 하려고*/
+  height: 80px;
+}
+
+/* 글자 수 표시 스타일링 */
+
+.inputComment p {
+  /*text-align: left; /* 오른쪽 정렬 */
+  /*margin-bottom: 10px; /* 입력 버튼과의 간격 */
+  margin: 0; /* 기존 마진 제거 */
+  /*align-self: flex-end; /* 글자 수를 입력란 아래에 정렬 */
+
+  flex-basis: 100%; /* 별도의 행으로 설정 */
+  text-align: left;
+  font-size: 15px;
+  opacity: 60%;
+}
+
+/* 입력 버튼 스타일링 */
+.inputComment button {
+  flex: 1 1 0%;
+
+  height: 100px;
+
+  margin-left: 20px;
+  width: 100%; /* 전체 너비 */
+  padding: 10px; /* 버튼 내부 여백 */
+  background-color: black; /* 버튼 배경 색상 */
+  border: 1px solid white; /* 버튼 테두리 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+  color: #ffffff; /* 버튼 글자 색상 */
+  cursor: pointer; /* 클릭 가능 표시 */
+  font-size: 1rem; /* 글자 크기 */
+  font-weight: bold; /* 글자 굵기 */
+}
+
+/* 호버 효과 */
+.inputComment button:hover {
+  background-color: #ff17e5; /* 버튼 배경 색상 변경 */
+}

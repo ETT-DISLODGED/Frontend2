@@ -4,42 +4,41 @@ nav {
   display: flex;
   position: fixed;
   top: 0;
-  background-color: #00001C;
-  margin-top: 50px; /* 원하는 여백 값으로 조절 */
-  z-index: 1;/* 상하좌우 여백 조절 (적절한 값으로 조절) */
+  background-color: #00001c;
+  margin-top: 40px; /* 원하는 여백 값으로 조절 */
+  z-index: 1; /* 상하좌우 여백 조절 (적절한 값으로 조절) */
 }
 
 /* 로고 왼쪽 정렬 */
 .logo-item {
   list-style: none;
   position: fixed;
-  left:0;
-  margin-left:40px;
+  left: 0;
+  margin-left: 40px;
 }
 
 /* 로고 이미지 크기 */
 .logo {
-  width: 80px; 
-  height: auto; 
+  width: 80px;
+  height: auto;
 }
 
 .navbar-list {
   list-style: none;
   display: flex;
-  flex-direction: row; 
-  gap: 100px; 
+  flex-direction: row;
+  gap: 100px;
   position: fixed;
-  right:0;
-  padding-right : 40px;
- 
+  right: 0;
+  padding-right: 40px;
 }
 
 .nav-border {
   list-style: none;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   gap: 100px; /* 각 nav 항목 간의 간격 (적절한 값으로 조절) */
-  border-bottom: 10px solid transparent; 
+  border-bottom: 10px solid transparent;
 }
 
 .nav-border a {
@@ -58,5 +57,4 @@ nav {
   margin-left: auto; /* 남은 공간을 모두 오른쪽에 배치 */
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
-
 }
