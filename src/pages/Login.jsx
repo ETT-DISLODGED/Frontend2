@@ -8,6 +8,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "../styles/Login.css";
 
+import { useUser } from "../components/userContext";
+
 const CenteredContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
@@ -60,6 +62,9 @@ const PasswordInput = styled(TextField)(inputStyles);
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

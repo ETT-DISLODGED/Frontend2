@@ -3,8 +3,9 @@ import "../styles/DiaryEditor.css";
 import { getStringDate } from "../util/date";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useContext, useEffect } from "react";
-import { DiaryDispatchContext } from "./../App";
+//import { DiaryDispatchContext } from "./../App";
 import { groups } from "../util/group";
+import axios from "axios";
 
 //const categories = ["진로", "연애", "가족/친구", "기타"]; // 카테고리 배열
 
@@ -61,35 +62,51 @@ const DiaryEditor = ({ isEdit, originData }) => {
     setLevel(event.target.value);
   };
 
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  //const { onCreate, onEdit } = useContext(DiaryDispatchContext);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (content.length < 1) {
       contentRef.current.focus();
       return;
     }
 
+    const postData = {
+      tag,
+      title,
+      group,
+      level,
+      content
+    };
+
     if (
       window.confirm(
         isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?"
       )
-    ) {
-      if (!isEdit) {
-        onCreate(tag, title, group, level, content);
-      } else {
-        onEdit(
-          originData.id,
-          originData.created_at,
-          tag,
-          title,
-          group,
-          level,
-          content
-        );
+    )
+      try {
+        if (!isEdit) {
+          //onCreate(tag, title, group, level, content);
+          await axios.post(`/posts/post/`, postData, {
+            headers: {
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
+              `
+            }
+          });
+          alert("작성 완료");
+        } else {
+          await axios.put(`/posts/post/${originData.id}`, postData, {
+            headers: {
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
+              `
+            }
+          });
+          alert("수정 완료");
+        }
+        navigate("/", { replace: true });
+      } catch (error) {
+        console.error("게시글 작성/수정에 실패", error);
+        alert("게시글 작성/수정에 실패");
       }
-    }
-
-    navigate("/", { replace: true });
   };
 
   useEffect(() => {
@@ -178,7 +195,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         <h4>본문내용</h4>
         <div className="input_box text_wrapper">
           <textarea
-            placeholder="오늘은 어땠나요?"
+            placeholder="고민을 적어주세요?"
             ref={contentRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}

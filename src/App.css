@@ -13,3 +13,25 @@
     padding: 1rem;
   }
 }
+
+/* 모든 요소 및 모든 상태의 스크롤바 스타일을 지정 */
+* {
+  scrollbar-width: thin; /* Firefox에서 스크롤바 두께를 얇게 설정 */
+  scrollbar-color: black transparent; /* Firefox에서 스크롤바 색상 설정 */
+}
+
+/* Chrome, Edge, Safari 등에서 스크롤바 스타일을 지정 */
+*::-webkit-scrollbar {
+  width: 8px; /* 스크롤바의 너비 */
+  height: 12px; /* 수평 스크롤바의 높이 */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* 스크롤바 트랙(바탕) 색상 */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black; /* 스크롤바 색상 */
+  border-radius: 20px; /* 스크롤바 모서리 둥글게 */
+  border: 3px solid transparent; /* 스크롤바 테두리 */
+}

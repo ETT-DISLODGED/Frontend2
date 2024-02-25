@@ -83,7 +83,7 @@
 }
 
 .post-card {
-  background-color: #0d052b;
+  background-color: black;
   border: 1px solid white;
   margin-bottom: 15px;
   border-radius: 10px;
@@ -176,22 +176,80 @@
 }
 
 /* 페이징 */
-/*.pagination {
+.pagination {
   display: flex;
-  list-style: none;
   justify-content: center;
+  margin-top: 70px;
 }
 
-.page-item {
-  margin: 0 5px;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-.page-item.active .page-link {
-  font-weight: bold;
-  text-decoration: underline;
+ul.pagination li {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  /*border: 1px solid #e2e2e2;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 50%;
 }
 
-.page-link {
-  cursor: pointer;
-  color: #000;
-  /* 추가 스타일링 */
+ul.pagination li:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+ul.pagination li:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+ul.pagination li.active a {
+  color: white;
+}
+
+ul.pagination li.active {
+  background-color: #ff17e4ee;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  color: white;
+}
+
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: #ff17e4a2;
+}
+
+/* 모든 요소 및 모든 상태의 스크롤바 스타일을 지정 */
+* {
+  scrollbar-width: thin; /* Firefox에서 스크롤바 두께를 얇게 설정 */
+  scrollbar-color: black transparent; /* Firefox에서 스크롤바 색상 설정 */
+}
+
+/* Chrome, Edge, Safari 등에서 스크롤바 스타일을 지정 */
+*::-webkit-scrollbar {
+  width: 8px; /* 스크롤바의 너비 */
+  height: 12px; /* 수평 스크롤바의 높이 */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* 스크롤바 트랙(바탕) 색상 */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black; /* 스크롤바 색상 */
+  border-radius: 20px; /* 스크롤바 모서리 둥글게 */
+  border: 3px solid transparent; /* 스크롤바 테두리 */
+}
