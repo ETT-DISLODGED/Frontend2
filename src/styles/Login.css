@@ -4,15 +4,27 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.SignUpTextfield {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .SignupMessage {
-  margin-top: 20px; /* Adjust the top margin as needed */
+  margin-top: 20px;
 }
 
 .SignupMessage a {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8); /* White with 80% opacity */
+  color: rgba(255, 255, 255, 0.8); 
 }
 
 .toSignup {
   margin-left: 215px;
+}
+
+.toLogin {
+  margin-left: 217px;
 }

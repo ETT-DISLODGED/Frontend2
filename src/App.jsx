@@ -13,6 +13,7 @@ import Edit from "./pages/Edit";
 import New from "./pages/New";
 import Mypage from "./pages/Mypage";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import "./styles/global.css";
 import Navbar, { scrollToSection } from "./components/Navbar";
 import { comments_list } from "../src/util/comment";
@@ -158,6 +159,7 @@ const App = () => {
         <Route path="/Myvoice" element={<Myvoice />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
       </Routes>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
@@ -60,9 +61,7 @@ const PasswordInput = styled(TextField)(inputStyles);
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); //버전이 바뀌어서 useHistory 아니고 Navigate로
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -70,6 +69,11 @@ const Login = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleSignupClick = () => {
+    // 회원가입 버튼 클릭 시 이벤트 핸들러
+    navigate("/signup");// "/signup" 경로로 이동
   };
 
   return (
@@ -102,9 +106,9 @@ const Login = () => {
             회원이 아니신가요?
           </a>
           <a
-            style={{ textDecoration: "underline" }}
+            style={{ textDecoration: "underline", cursor: "pointer" }} // cursor 추가
             className="toSignup"
-            href="/signup"
+            onClick={handleSignupClick} // 클릭 이벤트 핸들러 연결
           >
             회원가입
           </a>
