@@ -6,6 +6,7 @@ import DiaryList from "../components/DiaryList";
 import { groups } from "../util/group";
 //import { CommentsContext } from "../App";
 import axios from "axios";
+import { getForumPosts } from "../lib/api";
 
 import Pagination from "react-js-pagination";
 
@@ -59,26 +60,12 @@ const Forum = () => {
   useEffect(() => {
     const getPostList = async () => {
       try {
-        const response = await axios.get(
-          `/posts/post/?group=${activeGroup}&page=${page}`,
-          {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-              `
-            }
-          }
-        );
-        const postsWithComments = response.data.results.map((post) => ({
-          ...post,
-          // API 응답에 댓글 수가 포함되어 있다면 직접 사용하고,
-          // 그렇지 않은 경우 comment 배열의 길이 등으로 계산
-          commentCount: post.comment?.length || 0
-        }));
-        setPostList(postsWithComments);
-        setPageCount(Math.ceil(response.data.count / 6));
-        //console.log(postsWithComments);
+        const response = await getForumPosts(activeGroup, page);
+        //api.js로 getForumPosts()를 옮겼어욥 ******* 0227
+        setPostList(response);
+        setPageCount(Math.ceil(response.length / 6));
       } catch (error) {
-        console.log(error);
+        console.error("포럼 게시물을 가져오는 중 오류가 발생했습니다:", error);
       }
     };
     getPostList();
