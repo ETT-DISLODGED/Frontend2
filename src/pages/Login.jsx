@@ -8,8 +8,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "../styles/Login.css";
 
-import { useUser } from "../components/userContext";
-
 const CenteredContainer = styled("div")({
   display: "flex",
   flexDirection: "column",

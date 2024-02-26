@@ -17,8 +17,6 @@ import "./styles/global.css";
 import Navbar, { scrollToSection } from "./components/Navbar";
 import { comments_list } from "../src/util/comment";
 
-import { UserProvider } from "../src/components/userContext"; //로그인 구현 전 사용자 권한 위해 임시 테스트용
-
 // UUID 생성 함수 시뮬레이션
 const generateUUID = () =>
   Math.random().toString(36).substring(2, 15) +

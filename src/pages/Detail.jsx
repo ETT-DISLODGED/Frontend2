@@ -11,8 +11,6 @@ import axios from "axios";
 
 //import { CommentsContext } from "../App";
 
-import { useUser } from "../components/userContext";
-
 const Detail = () => {
   const { id } = useParams();
   //console.log(id);
