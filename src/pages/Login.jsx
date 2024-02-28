@@ -8,7 +8,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "../styles/Login.css";
-import { login } from '../lib/api';
+import { login } from "../lib/api";
+
+import { useDispatch } from "react-redux";
+import { setToken } from "../redux/reducers/AuthReducer";
 
 const CenteredContainer = styled("div")({
   display: "flex",
@@ -67,6 +70,8 @@ const Login = () => {
   const [password, setPassword] = useState(""); // 비밀번호 상태 변수 추가
   const navigate = useNavigate(); //버전이 바뀌어서 useHistory 아니고 Navigate로
 
+  const dispatch = useDispatch(); //승현 추가
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -77,31 +82,35 @@ const Login = () => {
 
   const handleSignupClick = () => {
     // 회원가입 버튼 클릭 시 이벤트 핸들러
-    navigate("/signup");// "/signup" 경로로 이동
+    navigate("/signup"); // "/signup" 경로로 이동
   };
-
 
   const handleLogin = async () => {
     try {
       // 로그인 요청 보내기
       const response = await login({ username, password });
-      console.log('로그인 성공:', response);
+
+      console.log("로그인 성공:", response);
+
+      dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
       // 로그인 성공 시 처리
       navigate("/main");
     } catch (error) {
-      console.error('로그인 실패:', error);
+      console.error("로그인 실패:", error);
       // 로그인 실패 시 처리
-    
     }
   };
 
   return (
     <div className="IDPWTextfield">
       <CenteredContainer className="CenteredContainer">
-        <StyledTextField id="ID" label="ID" variant="outlined" 
-        value={username} // 상태 변수와 연결
-        onChange={(e) => setUsername(e.target.value)} // 입력 값 업데이트
-      />
+        <StyledTextField
+          id="ID"
+          label="ID"
+          variant="outlined"
+          value={username} // 상태 변수와 연결
+          onChange={(e) => setUsername(e.target.value)} // 입력 값 업데이트
+        />
         <PasswordInput
           id="Password"
           label="Password"
@@ -124,7 +133,9 @@ const Login = () => {
             )
           }}
         />
-        <GradientButton variant="outlined" onClick={handleLogin}>로그인</GradientButton>
+        <GradientButton variant="outlined" onClick={handleLogin}>
+          로그인
+        </GradientButton>
         <div className="SignupMessage">
           <a style={{ textDecoration: "none", color: "inherit" }}>
             회원이 아니신가요?

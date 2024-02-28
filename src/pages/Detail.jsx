@@ -9,7 +9,13 @@ import Comment from "./../components/comment";
 //import { DiaryDispatchContext } from "./../App";
 import axios from "axios";
 
-//import { CommentsContext } from "../App";
+import {
+  deleteComment,
+  deletePost,
+  addComment,
+  fetchPostDetail,
+  fetchComments
+} from "../lib/api";
 
 const Detail = () => {
   const { id } = useParams();
@@ -38,19 +44,13 @@ const Detail = () => {
 
   const [userNickname, setUserNickname] = useState("띵띵띵"); // 상태에 사용자의 닉네임을 저장한다고 가정 (로그인과 연결 전 임시 코드, 기술블로그 참고)
 
-  const { user } = useUser(); //현재 로그인한 사용자 정보
-
   const maxLength = 300; //댓글 최대 300자
 
   const handleDeleteComment = async (id) => {
     alert("댓글을 삭제하시겠습니까?");
     //deleteComment(id); //app.jsx에서 정의
-    await axios.delete(`/posts/comment/${id}`, {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-        `
-      }
-    });
+    await deleteComment(id);
+
     setCommentList((prevComments) =>
       prevComments.filter((comment) => comment.id !== id)
     );
@@ -66,12 +66,7 @@ const Detail = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
       //onRemove(id);
       try {
-        await axios.delete(`/posts/post/${id}`, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-            `
-          }
-        });
+        await deletePost(id);
         alert("삭제 완료");
         navigate("/Forum");
       } catch (error) {
@@ -93,15 +88,9 @@ const Detail = () => {
     };
 
     try {
-      const response = await axios.post("/posts/comment/", newComment, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-            `
-        }
-      });
-      const createdComment = response.data;
+      const createdComment = await addComment(newComment);
       setComment1(""); //댓글 입력창 리셋시켜주기
-      //addComment(newComment);
+
       setCommentList([...commentList, createdComment]);
       setCommentCount((commentCount) => commentCount + 1); //보이는 댓글 수 +1
     } catch (error) {
@@ -126,19 +115,11 @@ const Detail = () => {
     // 상세 정보를 가져오는 API 호출
     const fetchDiaryDetail = async () => {
       try {
-        const response = await axios.get(`/posts/post/${id}`, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts`
-          }
-        });
-        setData(response.data); // 받아온 데이터를 상태에 저장
+        const response = await fetchPostDetail(id);
+        setData(response); // 받아온 데이터를 상태에 저장
 
-        const commentResponse = await axios.get(`/posts/comment/`, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts`
-          }
-        });
-        setCommentList(commentResponse.data);
+        const commentResponse = await fetchComments();
+        setCommentList(commentResponse);
       } catch (error) {
         console.error("데이터를 불러오는데 실패했습니다.", error);
         alert("존재하지 않는 데이터입니다.");

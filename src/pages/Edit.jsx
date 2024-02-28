@@ -4,6 +4,8 @@ import React, { useContext, useEffect, useState } from "react";
 import DiaryEditor from "../components/DiaryEditor";
 import axios from "axios";
 
+import { getTargetPost } from "../lib/api";
+
 const Edit = () => {
   //const serverURL = import.meta.env.VITE_SERVER_URL;
 
@@ -19,12 +21,8 @@ const Edit = () => {
   useEffect(() => {
     const getTarget = async () => {
       try {
-        const { data } = await axios.get(`/posts/post/${id}`, {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-            `
-          }
-        });
+        const data = await getTargetPost(id);
+
         setOriginData(data);
       } catch (error) {
         console.log("저장된 게시글 내용 가져오는 중 오류 발생", error);

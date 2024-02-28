@@ -6,6 +6,7 @@ import { useState, useRef, useContext, useEffect } from "react";
 //import { DiaryDispatchContext } from "./../App";
 import { groups } from "../util/group";
 import axios from "axios";
+import { createDiary, updateDiary } from "../lib/api";
 
 //const categories = ["진로", "연애", "가족/친구", "기타"]; // 카테고리 배열
 
@@ -86,20 +87,11 @@ const DiaryEditor = ({ isEdit, originData }) => {
       try {
         if (!isEdit) {
           //onCreate(tag, title, group, level, content);
-          await axios.post(`/posts/post/`, postData, {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-              `
-            }
-          });
+          await createDiary(postData);
           alert("작성 완료");
         } else {
-          await axios.put(`/posts/post/${originData.id}`, postData, {
-            headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4ODc3MTQwLCJpYXQiOjE3MDg4NTkxNDAsImp0aSI6Ijk4YmZjZWE3ZDkwYjQzMjU4NTc0ZDk4MzhiMTMyODFmIiwidXNlcl9pZCI6IjNjMTNmYjY3LWZlMTItNDVkZS1iYTUzLTllOTQxNDA5MGRjZSJ9.eFt3jiyz6Uk0fuiUUPVdzge7zIrD4wV4olhXUFAuVts
-              `
-            }
-          });
+          await updateDiary(originData.id, postData);
+
           alert("수정 완료");
         }
         navigate("/", { replace: true });

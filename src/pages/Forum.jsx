@@ -60,10 +60,13 @@ const Forum = () => {
   useEffect(() => {
     const getPostList = async () => {
       try {
-        const response = await getForumPosts(activeGroup, page);
+        const { postWithComments, totalCount } = await getForumPosts(
+          activeGroup,
+          page
+        );
         //api.js로 getForumPosts()를 옮겼어욥 ******* 0227
-        setPostList(response);
-        setPageCount(Math.ceil(response.length / 6));
+        setPostList(postWithComments);
+        setPageCount(Math.ceil(totalCount / 6));
       } catch (error) {
         console.error("포럼 게시물을 가져오는 중 오류가 발생했습니다:", error);
       }
@@ -116,6 +119,7 @@ const Forum = () => {
           activePage={Number(page)}
           itemsCountPerPage={6}
           totalItemsCount={pageCount * 6}
+          //totalItemsCount={itemsNum}
           pageRangeDisplayed={5}
           prevPageText={"‹"}
           nextPageText={"›"}
