@@ -16,7 +16,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import "./styles/global.css";
 import Navbar, { scrollToSection } from "./components/Navbar";
-import { comments_list } from "../src/util/comment";
+
+import { useSelector } from "react-redux";
 
 // UUID 생성 함수 시뮬레이션
 const generateUUID = () =>
@@ -33,99 +34,10 @@ const ScrollToTop = () => {
   return null;
 };
 
-/*
-const reducer = (state, action) => {
-  let newState = [];
-  switch (action.type) {
-    case "INIT":
-      return action.data;
-    case "CREATE":
-      const newItem = {
-        ...action.data,
-        id: generateUUID() // id를 UUID로 생성하여 할당
-      };
-      newState = [newItem, ...state];
-      break;
-    case "REMOVE":
-      newState = state.filter((it) => it.id !== action.targetId);
-      break;
-    case "EDIT":
-      newState = state.map((it) =>
-        it.id === action.data.id ? { ...action.data } : it
-      );
-      break;
-    default:
-      return state;
-  }
-  return newState;
-};
-*/
-
-//export const DiaryStateContext = React.createContext();
-//export const DiaryDispatchContext = React.createContext();
-
-//export const CommentsContext = React.createContext();
-
 const App = () => {
-  //const [commentsList, setCommentsList] = useState(comments_list);
+  const token = useSelector((state) => state.Auth.token);
+  console.log(token);
 
-  //const [data, dispatch] = useReducer(reducer, dummyData);
-
-  //CREATE
-
-  // const onCreate = (/*created_at, */ tag, title, group, level, content) => {
-  /*   dispatch({
-      type: "CREATE",
-      data: {
-        id: generateUUID(),
-        created_at: new Date().toISOString(), // ISO 8601 형식으로 날짜를 생성(서버에 저장할때),
-        updated_at: new Date().toISOString(),
-        tag,
-        title,
-        group,
-        level,
-        content
-      }
-    });
-    //dataId.current += 1;
-  };
-
-  //Remove
-  const onRemove = (targetId) => {
-    dispatch({
-      type: "REMOVE",
-      targetId
-    });
-  };
-
-  //Edit
-  const onEdit = (targetId, created_at, tag, title, group, level, content) => {
-    dispatch({
-      type: "EDIT",
-      data: {
-        id: targetId, //id 유지
-        created_at: created_at, //date 유지
-        updated_at: new Date().toISOString(),
-        tag,
-        title,
-        group,
-        level,
-        content
-      }
-    });
-  };  */
-
-  /*
-  const addComment = (newComment) => {
-    setCommentsList((prevComments) => [...prevComments, newComment]);
-  };
-
-  const deleteComment = (commentId) => {
-    setCommentsList((prevComments) =>
-      prevComments.filter((comment) => comment.id !== commentId)
-    );
-  };
-*/
   return (
     <Router>
       <ScrollToTop />
