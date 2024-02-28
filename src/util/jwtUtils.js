@@ -1,6 +1,5 @@
-//import jwtDecode from "jwt-decode";
-// ES6 모듈 시스템의 명명된(named) export 사용
-import { jwtDecode } from "/node_modules/.vite/deps/jwt-decode.js?v=821a7e9e";
+
+import { jwtDecode } from "/node_modules/.vite/deps/jwt-decode.js";
 
 export class jwtUtils {
   // 토큰 유효성 검사

@@ -16,14 +16,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import "./styles/global.css";
 import Navbar, { scrollToSection } from "./components/Navbar";
-
+import PrivateRoute from "./routes/PrivateRoute";
 import { useSelector } from "react-redux";
 
-// UUID 생성 함수 시뮬레이션
-const generateUUID = () =>
-  Math.random().toString(36).substring(2, 15) +
-  Math.random().toString(36).substring(2, 15);
 
+
+  
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -49,7 +47,7 @@ const App = () => {
           path="/"
           element={
             <Main>
-              <Routes>
+
                 <Route path="/" element={<Section id="mainSection" />} />
                 <Route
                   path="/howToUse"
@@ -59,11 +57,10 @@ const App = () => {
                   path="/aboutUs"
                   element={<Section id="aboutUsSection" />}
                 />
-              </Routes>
             </Main>
           }
         />
-        <Route path="/Forum" element={<Forum />} />
+        <Route path="/Forum" element={<PrivateRoute component={Forum} />} />
         <Route path="/New" element={<New />} />
         <Route path="/Detail/:id" element={<Detail />} />
         <Route path="/Edit/:id" element={<Edit />} />
