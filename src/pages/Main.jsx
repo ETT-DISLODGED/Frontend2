@@ -1,16 +1,15 @@
 // Main.jsx
 
-import React from 'react';
-import '../styles/Main.css';
-import mainGif from '/assets/mainwave.gif';
-import howtouseimage from '/assets/mainwave.gif';
-
+import React from "react";
+import "../styles/Main.css";
+import mainGif from "/assets/mainwave.gif";
+import howtouseimage from "/assets/mainwave.gif";
 
 const Section = ({ id, title, content, image }) => {
   return (
     <section id={id}>
       <div className="section-container">
-        {id === 'mainSection' ? (
+        {id === "mainSection" ? (
           <div className="image-container">
             <img src={image} alt={`${title} 이미지`} />
           </div>
@@ -44,13 +43,13 @@ const Main = () => {
           id="howToUseSection"
           title="사용법 섹션"
           content="사용법이에요 사용법 사용법입니다"
-          image={howtouseimage} 
+          image={howtouseimage}
         />
         <Section
           id="aboutUsSection"
           title="소개 섹션"
           content="소개임 소개 소개입니다"
-          image={howtouseimage} 
+          image={howtouseimage}
         />
       </div>
     </div>

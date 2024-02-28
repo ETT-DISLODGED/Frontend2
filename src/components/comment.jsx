@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/comment.css";
 
-const Comment = ({ comments, deleteComment }) => {
+const Comment = ({ comments, deleteComment, post_id }) => {
   return (
     <div className="comments">
       {comments.map((comment) => {
