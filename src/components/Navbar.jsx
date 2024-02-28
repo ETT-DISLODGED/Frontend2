@@ -4,20 +4,24 @@ import "../styles/Navbar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
     navigate("/login");
   };
 
+  const navigateToMyPage = () => {
+    navigate("/mypage");
+  };
+
   return (
     <nav>
-      <li className="logo-item">
+      <div className="logo-item">
         <Link to="/Main">
           <img src="/assets/logo.png" alt="Logo" className="logo" />
         </Link>
-      </li>
+      </div>
 
       <ul className="navbar-list">
         <ul className="nav-border">
@@ -44,7 +48,13 @@ const Navbar = () => {
             </a>
           </li>
         </ul>
-        <div className="button-container">
+    
+      <div className="button-container">
+        {isLoggedIn ? (
+          <div className="ProfileButton" onClick={navigateToMyPage}>
+            <PersonIcon sx={{ fontSize: 32 }}/>
+          </div>
+        ) : (
           <div className="LoginButton">
             <Button
               variant="outlined"
@@ -54,20 +64,11 @@ const Navbar = () => {
               로그인
             </Button>
           </div>
-        </div>
+        )}
+      </div>
       </ul>
     </nav>
   );
 };
 
 export default Navbar;
-
-export const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-};
