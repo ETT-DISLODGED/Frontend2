@@ -95,6 +95,7 @@
 
 /* 댓글 입력란 전체 컨테이너 */
 .inputComment {
+  margin-top: 50px;
   background-color: black; /* 배경 색상 */
   padding: 20px; /* 내부 여백 */
   border-radius: 10px; /* 모서리 둥글게 */

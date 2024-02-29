@@ -6,7 +6,9 @@ import { getTargetPost } from "../lib/api";
 
 const Comment = ({ comments, deleteComment, post_id }) => {
   const token = useSelector((state) => state.Auth.token);
-  const [userNickname, setUserNickname] = useState("");
+  //const [userNickname, setUserNickname] = useState("");
+  const [userId, setUserId] = useState("");
+
   const [post, setPost] = useState("");
   const targetPost = async () => {
     try {
@@ -19,7 +21,7 @@ const Comment = ({ comments, deleteComment, post_id }) => {
 
   useEffect(() => {
     if (jwtUtils.isAuth(token)) {
-      jwtUtils.getNickname(token).then(setUserNickname);
+      setUserId(jwtUtils.getId(token));
     }
     targetPost();
   }, [token, post_id]);
@@ -43,7 +45,7 @@ const Comment = ({ comments, deleteComment, post_id }) => {
               <p className="comment_date">{formattedDate}</p>
             </div>
             <p className="comment_text">{comment.content}</p>
-            {jwtUtils.isAuth(token) && userNickname === post.author && (
+            {jwtUtils.isAuth(token) && userId === post.author_id && (
               <div className="comment_but">
                 <button
                   className="comment_del"

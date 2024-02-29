@@ -10,13 +10,15 @@ import { getForumPosts } from "../lib/api";
 
 import Pagination from "react-js-pagination";
 
+import { jwtUtils } from "../util/jwtUtils";
+import { useSelector } from "react-redux";
 // 카테고리 목록을 상수로 선언
 //const categories = ["진로", "연애", "가족/친구", "기타"];
 
 const Forum = () => {
   //const diaryList = useContext(DiaryStateContext);
 
-  //const serverURL = import.meta.env.VITE_SERVER_URL;
+  const token = useSelector((state) => state.Auth.token);
 
   const [searchParams, setSearchParams] = useSearchParams(); //페이지네이션 위해
 
@@ -106,11 +108,13 @@ const Forum = () => {
           </div>
         ))}
       </div>
-      <div className="write">
-        <button className="write-button" onClick={() => navigate("/new")}>
-          글 쓰러 가기
-        </button>
-      </div>
+      {jwtUtils.isAuth(token) && (
+        <div className="write">
+          <button className="write-button" onClick={() => navigate("/new")}>
+            글 쓰러 가기
+          </button>
+        </div>
+      )}
 
       <DiaryList diaryList={postList} />
 

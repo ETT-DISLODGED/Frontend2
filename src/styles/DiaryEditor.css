@@ -75,6 +75,7 @@ header .head_text {
   margin: 0 5px; /* 버튼 사이 간격 */
   border: white;
   background-color: white;
+  color: black;
 }
 
 .on {
@@ -163,6 +164,7 @@ header .head_text {
 }
 .severity-range {
   -webkit-appearance: none; /* 오버라이드 기본 스타일 */
+  appearance: none;
   width: 50%; /* 슬라이더의 전체 폭 */
   height: 5px; /* 슬라이더의 높이 */
   background: white; /* 슬라이더의 배경색 */

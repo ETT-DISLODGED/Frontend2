@@ -41,6 +41,8 @@ const Detail = () => {
 
   const [userNickname, setUserNickname] = useState(""); // 상태에 사용자의 닉네임을 저장한다고 가정 (로그인과 연결 전 임시 코드, 기술블로그 참고)
 
+  const [userId, setUserId] = useState("");
+
   const maxLength = 300; //댓글 최대 300자
 
   const handleDeleteComment = async (id) => {
@@ -99,6 +101,10 @@ const Detail = () => {
   useEffect(() => {
     if (jwtUtils.isAuth(token)) {
       jwtUtils.getNickname(token).then(setUserNickname);
+      setUserId(jwtUtils.getId(token));
+      //console.log(userId);
+      //jwtUtils.getUserId(token).then(setUserId);
+      //console.log(userId);
     }
   }, [token]);
 
@@ -161,7 +167,7 @@ const Detail = () => {
         <div className="detail_button">
           {/* 로그인한 사용자가 작성자일 경우에만 수정 및 삭제 버튼 표시 */}
 
-          {jwtUtils.isAuth(token) && userNickname === data.author && (
+          {jwtUtils.isAuth(token) && userId === data.author_id && (
             <div>
               <button
                 className="edit"
@@ -190,7 +196,7 @@ const Detail = () => {
             <textarea
               className="writeComment"
               value={comment1}
-              placeholder="1-300자까지 입력가능"
+              placeholder="작성한 댓글은 삭제할 수 없으니 신중하게 달아주세요!(1-300자까지 입력가능)"
               onChange={handleInputChange}
             />
             <button type="submit">입력</button>

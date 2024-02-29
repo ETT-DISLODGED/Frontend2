@@ -1,5 +1,10 @@
-import React , {useEffect} from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 import { Main, Section } from "./pages/Main";
 import Myvoice from "./pages/Myvoice";
 import Forum from "./pages/Forum";
@@ -39,15 +44,24 @@ const App = () => {
           element={
             <Main>
               <Route path="/" element={<Section id="mainSection" />} />
-              <Route path="/howToUse" element={<Section id="howToUseSection" />} />
-              <Route path="/aboutUs" element={<Section id="aboutUsSection" />} />
+              <Route
+                path="/howToUse"
+                element={<Section id="howToUseSection" />}
+              />
+              <Route
+                path="/aboutUs"
+                element={<Section id="aboutUsSection" />}
+              />
             </Main>
           }
         />
         <Route path="/Forum" element={<PrivateRoute component={Forum} />} />
-        <Route path="/New" element={<New />} />
-        <Route path="/Detail/:id" element={<Detail />} />
-        <Route path="/Edit/:id" element={<Edit />} />
+        <Route path="/New" element={<PrivateRoute component={New} />} />
+        <Route
+          path="/Detail/:id"
+          element={<PrivateRoute component={Detail} />}
+        />
+        <Route path="/Edit/:id" element={<PrivateRoute component={Edit} />} />
         <Route path="/Myvoice" element={<Myvoice />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path="/Login" element={<Login />} />

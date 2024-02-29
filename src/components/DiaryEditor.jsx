@@ -134,7 +134,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         <input
           className="tag-input"
           type="text"
-          placeholder="댓글 모아들을 때 사용할 태그(1-8글자까지 입력)"
+          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-8글자까지 입력)"
           value={tag}
           ref={tagRef}
           onChange={handleTagChange}
@@ -187,7 +187,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         <h4>본문내용</h4>
         <div className="input_box text_wrapper">
           <textarea
-            placeholder="고민을 적어주세요?"
+            placeholder="고민을 적어주세요!"
             ref={contentRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
