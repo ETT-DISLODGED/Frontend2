@@ -70,6 +70,7 @@
 }
 
 .detail_button {
+  display: flex;
   text-align: left; /* 버튼을 왼쪽으로 정렬 */
   padding-left: calc(
     20% + 10px

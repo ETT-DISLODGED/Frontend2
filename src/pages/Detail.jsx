@@ -9,6 +9,9 @@ import Comment from "./../components/comment";
 //import { DiaryDispatchContext } from "./../App";
 import axios from "axios";
 
+import { jwtUtils } from "../util/jwtUtils";
+import { useSelector } from "react-redux";
+
 import {
   deleteComment,
   deletePost,
@@ -21,14 +24,8 @@ const Detail = () => {
   const { id } = useParams();
   //console.log(id);
 
-  //const { onRemove } = useContext(DiaryDispatchContext);
-
-  //const diaryList = useContext(DiaryStateContext);
-
-  /*const { commentsList, addComment, deleteComment } =
-    useContext(CommentsContext);*/
-
-  //const { addComment, deleteComment } = useContext(CommentsContext);
+  const token = useSelector((state) => state.Auth.token);
+  //console.log(jwtUtils.getNickname(token));
 
   const navigate = useNavigate();
   const [data, setData] = useState(); //targetDiary 담을 state. useState를 이용해야 상태변화가 일어난다
@@ -42,7 +39,7 @@ const Detail = () => {
   // 필터링된 댓글 목록 상태
   const [filteredComments, setFilteredComments] = useState([]);
 
-  const [userNickname, setUserNickname] = useState("띵띵띵"); // 상태에 사용자의 닉네임을 저장한다고 가정 (로그인과 연결 전 임시 코드, 기술블로그 참고)
+  const [userNickname, setUserNickname] = useState(""); // 상태에 사용자의 닉네임을 저장한다고 가정 (로그인과 연결 전 임시 코드, 기술블로그 참고)
 
   const maxLength = 300; //댓글 최대 300자
 
@@ -99,18 +96,12 @@ const Detail = () => {
     }
   };
 
-  /*
   useEffect(() => {
-    if (diaryList.length >= 1) {
-      const targetDiary = diaryList.find((it) => it.id === id);
-      if (targetDiary) {
-        setData(targetDiary);
-      } else {
-        alert("없는 일기입니다.");
-        navigate("/", { replace: true });
-      }
+    if (jwtUtils.isAuth(token)) {
+      jwtUtils.getNickname(token).then(setUserNickname);
     }
-  }, [id, diaryList]); */
+  }, [token]);
+
   useEffect(() => {
     // 상세 정보를 가져오는 API 호출
     const fetchDiaryDetail = async () => {
@@ -169,7 +160,8 @@ const Detail = () => {
         <div className="content">{data.content}</div>
         <div className="detail_button">
           {/* 로그인한 사용자가 작성자일 경우에만 수정 및 삭제 버튼 표시 */}
-          {/*user && user.name === data.author && (
+
+          {jwtUtils.isAuth(token) && userNickname === data.author && (
             <div>
               <button
                 className="edit"
@@ -181,13 +173,8 @@ const Detail = () => {
                 삭제
               </button>
             </div>
-          )*/}
-          <button className="edit" onClick={() => navigate(`/edit/${data.id}`)}>
-            수정
-          </button>
-          <button className="remove" onClick={handleDelete}>
-            삭제
-          </button>
+          )}
+
           <button className="list" onClick={() => navigate("/forum")}>
             목록
           </button>

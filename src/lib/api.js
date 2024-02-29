@@ -191,3 +191,13 @@ export const createDiary = async (postData) => {
 export const updateDiary = async (id, postData) => {
   await client.put(`/posts/post/${id}`, postData);
 };
+
+//jwtUtils
+export const fetchUserInfo = async (token) => {
+  try {
+    const response = await client.get(`/accounts/update`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

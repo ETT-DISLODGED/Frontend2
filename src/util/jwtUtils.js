@@ -1,5 +1,7 @@
-
+//import { jwtDecode } from "/node_modules/.vite/deps/jwt-decode.js";
 import jwt_decode from "jwt-decode";
+
+import { fetchUserInfo } from "../lib/api.js";
 
 export class jwtUtils {
   // 토큰 유효성 검사
@@ -18,5 +20,15 @@ export class jwtUtils {
   static getId(token) {
     const decoded = jwt_decode(token);
     return decoded.jti;
+  }
+
+  static async getNickname(token) {
+    try {
+      const userInfo = await fetchUserInfo(token);
+      return userInfo.nickname; // 예: 사용자 정보 객체에서
+    } catch (error) {
+      console.error("사용자 이름을 가져오는 데 실패했습니다.", error);
+      return null; // 오류 발생 시 null 반환
+    }
   }
 }

@@ -1,7 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "../styles/comment.css";
+import { jwtUtils } from "../util/jwtUtils";
+import { useSelector } from "react-redux";
+import { getTargetPost } from "../lib/api";
 
 const Comment = ({ comments, deleteComment, post_id }) => {
+  const token = useSelector((state) => state.Auth.token);
+  const [userNickname, setUserNickname] = useState("");
+  const [post, setPost] = useState("");
+  const targetPost = async () => {
+    try {
+      const response = await getTargetPost(post_id);
+      setPost(response);
+    } catch (error) {
+      console.log("해당 게시글 가져오는데 실패했습니다");
+    }
+  };
+
+  useEffect(() => {
+    if (jwtUtils.isAuth(token)) {
+      jwtUtils.getNickname(token).then(setUserNickname);
+    }
+    targetPost();
+  }, [token, post_id]);
+
   return (
     <div className="comments">
       {comments.map((comment) => {
@@ -21,14 +43,16 @@ const Comment = ({ comments, deleteComment, post_id }) => {
               <p className="comment_date">{formattedDate}</p>
             </div>
             <p className="comment_text">{comment.content}</p>
-            <div className="comment_but">
-              <button
-                className="comment_del"
-                onClick={() => deleteComment(comment.id)}
-              >
-                삭제하기
-              </button>
-            </div>
+            {jwtUtils.isAuth(token) && userNickname === post.author && (
+              <div className="comment_but">
+                <button
+                  className="comment_del"
+                  onClick={() => deleteComment(comment.id)}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )}
           </div>
         );
       })}
