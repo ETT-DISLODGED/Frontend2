@@ -52,12 +52,12 @@ const Navbar = ({ isLoggedIn }) => {
       <div className="button-container">
         {isLoggedIn ? (
           <div className="ProfileButton" onClick={navigateToMyPage}>
-            <PersonIcon sx={{ fontSize: 32 }}/>
+            <PersonIcon sx={{ fontSize: 32, color: 'white' }} />
           </div>
         ) : (
           <div className="LoginButton">
             <Button
-              variant="outlined"
+              variant="outlined" 
               style={{ bottom: "6px" }}
               onClick={navigateToLogin}
             >

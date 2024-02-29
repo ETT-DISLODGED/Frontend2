@@ -71,6 +71,7 @@ header .head_text {
 
 /* 카테고리 버튼 스타일링 */
 .categoryButton {
+  color: black;
   padding: 8px 16px;
   margin: 0 5px; /* 버튼 사이 간격 */
   border: white;
