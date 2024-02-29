@@ -11,7 +11,7 @@ import "../styles/Login.css";
 import { login } from "../lib/api";
 
 import { useDispatch } from "react-redux";
-import { setToken } from "../redux/reducers/AuthReducer";
+import { setToken, setRefreshToken } from "../redux/reducers/AuthReducer";
 
 const CenteredContainer = styled("div")({
   display: "flex",
@@ -89,12 +89,12 @@ const Login = () => {
     try {
       // 로그인 요청 보내기
       const response = await login({ username, password });
-
-      console.log("로그인 성공:", response);
-
+      //userInfo.user = response.user; 
+      
       dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
+      dispatch(setRefreshToken(response.token.refresh));
 
-      // 로그인 성공 시 처리
+
       navigate("/main");
     } catch (error) {
       console.error("로그인 실패:", error);

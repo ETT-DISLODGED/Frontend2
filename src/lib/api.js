@@ -1,9 +1,14 @@
 import axios from "axios";
 import store from "../redux/configStore";
 import { jwtUtils } from "../util/jwtUtils";
+import { useDispatch } from "react-redux"; 
+import { useNavigate } from "react-router-dom";
+
+
+
 
 // 서버 측에서 준 배포 url
-const BASE_URL = "https://dislodged.shop/";
+const BASE_URL = "https://dislodged.shop";
 
 const client = axios.create({
   baseURL: BASE_URL,
@@ -18,14 +23,29 @@ const client = axios.create({
  2개의 콜백 함수를 받습니다.
  */
 client.interceptors.request.use(
-  (config) => {
+
+
+  async (config) => {
     // HTTP Authorization 요청 헤더에 jwt-token을 넣음
     // 서버측 미들웨어에서 이를 확인하고 검증한 후 해당 API에 요청함.
+    //const dispatch = useDispatch();
+    //const navigate = useNavigate();
     const token = store.getState().Auth.token;
     try {
-      if (token && jwtUtils.isAuth(token)) {
+      if (token) {
+        if(jwtUtils.isAuth(token)) {
         config.headers.Authorization = `Bearer ${token}`;
-      }
+        }
+        else{
+          //dispatch(setToken(""));
+          //alert("로그인타임만료");
+          //navigate("/login")
+          //const refreshToken = store.getState().Auth.refreshToken;
+         // const newToken = await newAccessToken(refreshToken);
+          //config.headers.Authorization = `Bearer ${newToken}`;
+        }
+     }
+
 
       return config;
     } catch (err) {
@@ -85,20 +105,17 @@ export const login = async (userData) => {
   try {
     // 로그인 요청 보내기
     const response = await client.post("/accounts/login/", userData);
-
-    //Authorization 헤더 설정
-    /*
-    const accessToken = response.data.token.access;
-    console.log("accessToken:", accessToken);
-    client.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-    */
     return response.data;
+
+
   } catch (error) {
     // 요청이 실패했을 때
     console.error("로그인 요청 실패:", error);
     throw error;
   }
 };
+
+
 
 export const getForumPosts = async (activeGroup, page) => {
   try {
@@ -198,6 +215,22 @@ export const fetchUserInfo = async (token) => {
     const response = await client.get(`/accounts/update`);
     return response.data;
   } catch (error) {
+    throw error;
+  }
+};
+
+
+
+
+// refresh로 access 새로 받는 api 호출
+export const newAccessToken = async (refreshToken) => {
+  try {
+    // 로그인 요청 보내기
+    const response = await client.post("/accounts/refresh/token", { refreshToken });
+    return response.data;
+  } catch (error) {
+    // 요청이 실패했을 때
+    console.error("새로운 액세스 토큰 요청 실패:", error);
     throw error;
   }
 };

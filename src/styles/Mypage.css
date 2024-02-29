@@ -1,0 +1,255 @@
+/* Forum.jsx */
+.mypage {
+  background-color: black;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+
+  position: fixed;
+
+  bottom: 0; /* 아래쪽으로는 화면 끝까지 */
+
+  top: 15%; /* 화면의 정중앙부터 시작 */
+
+  overflow: auto;
+
+  box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
+
+  width: 100%;
+}
+
+.mypage-intro {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.mypage-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.mypage-tab {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
+.mypage-tab.active {
+  background-color: white;
+  color: black;
+  border: 3px solid #ff17e5;
+}
+
+.write {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+  padding-bottom: 50px;
+
+  width: 85%;
+}
+
+.mypage-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 60px; /* 게시글 사이의 간격 조절 */
+  margin-bottom: 20px; /* 페이지네이션과의 간격 */
+  padding-left: 60px;
+  padding-right: 60px;
+
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 (화면 크기에 따라 한 줄에 표시되는 아이템 수를 조정) */
+@media (max-width: 768px) {
+  .mypage-body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mypage-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.post-card {
+  background-color: black;
+  border: 1px solid white;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+
+  height: 200px;
+
+  position: relative;
+  overflow: hidden;
+
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+}
+
+.post-card-header {
+  /*display: flex;
+  justify-content: space-between;*/
+  align-items: center;
+  margin-bottom: 10px;
+}
+.post-card-header .post-title {
+  margin-bottom: 7px;
+  font-size: 22px;
+}
+.post-card-header .post-date {
+  opacity: 60%;
+}
+
+.post-card-body {
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #ff17e5; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.write-button {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .mypage-header {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .mypage-tab {
+    display: inline-block;
+  }
+}
+
+.comment-count {
+  text-align: right;
+  position: absolute; /* 절대적 위치 설정 */
+  bottom: 20px; /* 하단으로부터 10px 떨어진 곳에 배치 */
+  right: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.comment2 {
+  width: 24px; /* 이미지 크기 설정 */
+  height: auto; /* 이미지 비율 유지 */
+}
+
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul.pagination li {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  /*border: 1px solid #e2e2e2;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 50%;
+}
+
+ul.pagination li:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+ul.pagination li:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+ul.pagination li.active a {
+  color: white;
+}
+
+ul.pagination li.active {
+  background-color: #ff17e4ee;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a.active {
+  color: white;
+}
+
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: #ff17e4a2;
+}
+
+/* 모든 요소 및 모든 상태의 스크롤바 스타일을 지정 */
+* {
+  scrollbar-width: thin; /* Firefox에서 스크롤바 두께를 얇게 설정 */
+  scrollbar-color: black transparent; /* Firefox에서 스크롤바 색상 설정 */
+}
+
+/* Chrome, Edge, Safari 등에서 스크롤바 스타일을 지정 */
+*::-webkit-scrollbar {
+  width: 8px; /* 스크롤바의 너비 */
+  height: 12px; /* 수평 스크롤바의 높이 */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* 스크롤바 트랙(바탕) 색상 */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black; /* 스크롤바 색상 */
+  border-radius: 20px; /* 스크롤바 모서리 둥글게 */
+  border: 3px solid transparent; /* 스크롤바 테두리 */
+}
