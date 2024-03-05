@@ -79,12 +79,12 @@ const Detail = () => {
     e.preventDefault(); //form은 submit하면 창이 reload되는데 reload 되는 걸 막아줌
     //console.log(comment1);
     const newComment = {
-      //id: Date.now(), //데이터베이스에 추가하면 아이디가 생성되므로 걔를 사용하면 됨
       content: comment1,
       post: id //useParmas에서 가져온 id 이용
       //created_at: new Date().toISOString(),
       //author: userNickname //로그인이랑 연결한 후 바꾸기
     };
+    //여기에서 tts로 변환된 댓글을 db에 같이 넘겨주면 되나,,?
 
     try {
       const createdComment = await addComment(newComment);
@@ -196,7 +196,7 @@ const Detail = () => {
             <textarea
               className="writeComment"
               value={comment1}
-              placeholder="작성한 댓글은 삭제할 수 없으니 신중하게 달아주세요!(1-300자까지 입력가능)"
+              placeholder="작성한 댓글은 삭제할 수 없으니 신중하게 위로를 남겨주세요!(1-300자까지 입력가능)"
               onChange={handleInputChange}
             />
             <button type="submit">입력</button>

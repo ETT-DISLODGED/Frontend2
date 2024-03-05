@@ -166,23 +166,25 @@ const DiaryEditor = ({ isEdit, originData }) => {
           ))}
         </div>
         <div className="severity-container">
-          <h4>심각도(1~5)</h4>
+          <h4>심각도(1~3)</h4>
           <p className="severity-description">
             자신의 고민에 대한 심각도를 표시해주세요 *본인만 확인 가능
           </p>{" "}
         </div>
         <span>{level}</span>
         <div className="severitySelector">
+          <span className="range-value range-min">1</span>
           <input
             type="range"
             id="level"
             name="level"
             min="1"
-            max="5"
+            max="3"
             value={level}
             onChange={handleLevelChange}
             className="severity-range"
           />
+          <span className="range-value range-min">3</span>
         </div>
         <h4>본문내용</h4>
         <div className="input_box text_wrapper">

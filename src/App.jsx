@@ -62,7 +62,7 @@ const App = () => {
           element={<PrivateRoute component={Detail} />}
         />
         <Route path="/Edit/:id" element={<PrivateRoute component={Edit} />} />
-        <Route path="/Myvoice" element={<Myvoice />} />
+        <Route path="/Myvoice" element={<PrivateRoute component={Myvoice} />} />
         <Route path="/Mypage" element={<Mypage />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Signup" element={<Signup />} />

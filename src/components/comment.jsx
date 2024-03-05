@@ -43,6 +43,12 @@ const Comment = ({ comments, deleteComment, post_id }) => {
             <div className="com_header">
               <p className="comment_author">{comment.author}</p>
               <p className="comment_date">{formattedDate}</p>
+              <img
+                src="/assets/commentPlay.png"
+                onClick={""}
+                alt="commentPlay"
+                className="commentPlay"
+              ></img>
             </div>
             <p className="comment_text">{comment.content}</p>
             {jwtUtils.isAuth(token) && userId === post.author_id && (
