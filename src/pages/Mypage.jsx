@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux"; // useDispatch를 추가합니다.
 import "../styles/Mypage.css";
 import DiaryList from "../components/DiaryList";
-import { getForumPosts } from "../lib/api";
+import { getMyForumPosts } from "../lib/api";
 import Pagination from "react-js-pagination";
 import { setToken } from "../redux/reducers/AuthReducer";
 
@@ -15,16 +15,16 @@ const Mypage = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [postList, setPostList] = useState([]);
-  const [activeGroup, setActiveGroup] = useState(searchParams.get("group") || "진로");
+ 
 
 
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
-    updateURL(activeGroup, pageNumber);
+    updateURL(pageNumber);
   };
 
-  const updateURL = (groupName, pageNumber) => {
-    setSearchParams({ group: groupName, page: pageNumber });
+  const updateURL = (pageNumber) => {
+    setSearchParams({ page: pageNumber });
   };
 
   const logout = async () => {
@@ -37,7 +37,7 @@ const Mypage = () => {
   useEffect(() => {
     const getPostList = async () => {
       try {
-        const { postWithComments, totalCount } = await getForumPosts(activeGroup, page);
+        const { postWithComments, totalCount } = await getMyForumPosts(page);
         setPostList(postWithComments);
         setPageCount(Math.ceil(totalCount / 6));
       } catch (error) {
@@ -45,7 +45,7 @@ const Mypage = () => {
       }
     };
     getPostList();
-  }, [searchParams, activeGroup, page]);
+  }, [searchParams, page]);
 
   return (
     <div className="mypage">

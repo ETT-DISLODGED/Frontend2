@@ -31,28 +31,14 @@ const Navbar = ({ isLoggedIn }) => {
           <li>
             <Link to="/myvoice">나만의보이스</Link>
           </li>
-          <li>
-            <a
-              href="#howToUseSection"
-              onClick={() => scrollToSection("howToUseSection")}
-            >
-              사용법
-            </a>
-          </li>
-          <li>
-            <a
-              href="#aboutUsSection"
-              onClick={() => scrollToSection("aboutUsSection")}
-            >
-              About us
-            </a>
-          </li>
+          
+  
         </ul>
     
       <div className="button-container">
         {isLoggedIn ? (
           <div className="ProfileButton" onClick={navigateToMyPage}>
-            <PersonIcon sx={{ fontSize: 32, color: 'white' }} />
+            <PersonIcon sx={{ fontSize: 34, color: 'white' }} />
           </div>
         ) : (
           <div className="LoginButton">
