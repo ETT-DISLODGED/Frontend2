@@ -57,3 +57,34 @@
   background-color: black;
   border: 1px solid white;
 }
+
+@media (max-width: 768px) {
+  .comments {
+    padding: 10px; /* 댓글 목록의 내부 여백을 줄임 */
+  }
+
+  .comment {
+    margin-bottom: 20px; /* 댓글 사이의 간격을 늘림 */
+  }
+
+  .comment_author {
+    font-size: 14px; /* 댓글 작성자의 글꼴 크기를 조정 */
+    white-space: nowrap; /* 텍스트를 줄바꿈 없이 한 줄로 표시 */
+  }
+
+  .comment_date {
+    font-size: 12px; /* 댓글 작성일의 글꼴 크기를 줄임 */
+  }
+
+  .comment_text {
+    font-size: 14px; /* 댓글 내용의 글꼴 크기를 조정 */
+  }
+
+  .comment_but button {
+    font-size: 12px; /* 댓글 삭제 버튼의 글꼴 크기를 줄임 */
+  }
+
+  .commentPlay {
+    width: 20px; /* 댓글 재생 아이콘의 크기를 조정 */
+  }
+}

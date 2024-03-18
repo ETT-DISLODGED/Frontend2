@@ -89,11 +89,10 @@ const Login = () => {
     try {
       // 로그인 요청 보내기
       const response = await login({ username, password });
-      //userInfo.user = response.user; 
-      
+      //userInfo.user = response.user;
+
       dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
       dispatch(setRefreshToken(response.token.refresh));
-
 
       navigate("/main");
     } catch (error) {

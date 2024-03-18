@@ -9,6 +9,8 @@ const Comment = ({ comments, deleteComment, post_id }) => {
   //const [userNickname, setUserNickname] = useState("");
   const [userId, setUserId] = useState("");
 
+  const handleCommentPlay = () => {};
+
   const [post, setPost] = useState("");
   const targetPost = async () => {
     try {
@@ -45,7 +47,7 @@ const Comment = ({ comments, deleteComment, post_id }) => {
               <p className="comment_date">{formattedDate}</p>
               <img
                 src="/assets/commentPlay.png"
-                onClick={""}
+                onClick={handleCommentPlay}
                 alt="commentPlay"
                 className="commentPlay"
               ></img>
