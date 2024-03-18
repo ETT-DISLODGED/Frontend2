@@ -1,59 +1,36 @@
-// Main.jsx
-
 import React from "react";
+import { Link } from "react-router-dom"; // React Router의 Link 컴포넌트를 불러옵니다.
 import "../styles/Main.css";
-import mainGif from "/assets/mainwave.gif";
-import howtouseimage from "/assets/mainwave.gif";
-
-const Section = ({ id, title, content, image }) => {
-  return (
-    <section id={id}>
-      <div className="section-container">
-        {id === "mainSection" ? (
-          <div className="image-container">
-            <img src={image} alt={`${title} 이미지`} />
-          </div>
-        ) : (
-          <>
-            <div className="image-container">
-              <img src={image} alt={`${title} 이미지`} />
-            </div>
-            <div className="text-container">
-              <h2>{title}</h2>
-              <p>{content}</p>
-            </div>
-          </>
-        )}
-      </div>
-    </section>
-  );
-};
+//import mainGif from "/assets/mainwave.gif";
 
 const Main = () => {
   return (
-    <div>
-      <div className="sections">
-        <Section
-          id="mainSection"
-          title="메인"
-          content=""
-          image={mainGif} // 메인 섹션 이미지 추가
-        />
-        <Section
-          id="howToUseSection"
-          title="사용법 섹션"
-          content="사용법이에요 사용법 사용법입니다"
-          image={howtouseimage}
-        />
-        <Section
-          id="aboutUsSection"
-          title="소개 섹션"
-          content="소개임 소개 소개입니다"
-          image={howtouseimage}
-        />
-      </div>
+    <div className="main-container">
+      <section className="section section1">
+        {/* 첫 번째 섹션 내용 */}
+      </section>
+      <section className="section section2">
+        <div className="section2-content">
+          <p>DISLODGED사용법 사용법 섹션입니다.
+            예예 사용법섹션입니다. 사용법예예예
+          </p>
+          <Link to="/myvoice">
+            <button>나만의 가상 보이스 생성하기</button> 
+          </Link>
+        </div>
+      </section>
+      <section className="section section3">
+      <div className="section3-content">
+          <p>이건 왜 만들었을까?
+            우리가 누구인지 궁금합니까.
+            어떤 기술들이 쓰였는지 알고싶나요
+            예 저도 그렇습니다.</p>
+            <p>의견이나 건의사항이 있다면 알려주세요</p>
+            <button>Contact us</button> 
+        </div>
+      </section>
     </div>
   );
 };
 
-export { Main, Section };
+export default Main;

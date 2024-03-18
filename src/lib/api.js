@@ -265,6 +265,27 @@ export const UpdateVoice = async (postVoice) => {
   await client.put(`/accounts/myvoice/`, postVoice);
 };
 
+//마이페이지 - 내가 작성한 게시글 불러오는 함수
+export const getMyForumPosts = async (page) => {
+  try {
+    const response = await client.get(`/accounts/mypost/?page=${page}`);
+    const postWithComments = response.data.results.map((post) => ({
+      ...post,
+      // API 응답에 댓글 수가 포함되어 있다면 직접 사용하고,
+      // 그렇지 않은 경우 comment 배열의 길이 등으로 계산
+      commentCount: post.comment?.length || 0
+    }));
+    return {
+      postWithComments,
+      totalCount: response.data.count // 전체 포스트 수
+    };
+  } catch (error) {
+    console.error("내가 작성한 게시물 목록을 가져오는 데 실패했습니다:", error);
+    throw error;
+  }
+};
+
+// 사용자 목소리 정보 받아오기
 export const voiceInfo = async () => {
   try {
     const response = await client.get(`/accounts/myvoice/`);

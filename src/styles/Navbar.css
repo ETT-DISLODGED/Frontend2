@@ -3,9 +3,9 @@
 nav {
   display: flex;
   position: fixed;
-  top: 0;
+  top: 10%;
   background-color: #00001c;
-  margin-top: 40px; /* 원하는 여백 값으로 조절 */
+  /*margin-top: 40px;  원하는 여백 값으로 조절 */
   z-index: 1; /* 상하좌우 여백 조절 (적절한 값으로 조절) */
 }
 
@@ -13,7 +13,7 @@ nav {
 .logo-item {
   list-style: none;
   position: fixed;
-  left: 0;
+  left: 15%;
   margin-left: 40px;
 }
 
@@ -29,7 +29,7 @@ nav {
   flex-direction: row;
   gap: 100px;
   position: fixed;
-  right: 0;
+  right: 15%;
   padding-right: 40px;
 }
 
@@ -44,13 +44,14 @@ nav {
 .nav-border a {
   text-decoration: none;
   color: white; /* 링크 텍스트 색상 */
-  font-size: 18px; /* 텍스트 크기 조절 */
+  font-size: 20px; /* 텍스트 크기 조절 */
   font-family: Arial, Helvetica, sans-serif; /* 폰트 설정 */
 }
 
 .LoginButton {
   margin-bottom: 25px;
 }
+
 
 /* 추가로 버튼을 오른쪽에 배치하기 위한 스타일 */
 .button-container {

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation
 } from "react-router-dom";
-import { Main, Section } from "./pages/Main";
+import Main from "./pages/Main";
 import Myvoice from "./pages/Myvoice";
 import Forum from "./pages/Forum";
 import Detail from "./pages/Detail";
@@ -17,7 +17,8 @@ import Signup from "./pages/Signup";
 import "./styles/global.css";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./routes/PrivateRoute";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { jwtUtils } from "./util/jwtUtils"; 
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -31,28 +32,30 @@ const ScrollToTop = () => {
 
 const App = () => {
   const token = useSelector((state) => state.Auth.token);
-  const isLoggedIn = !!token;
+  const [userInfo, setUserInfo] = useState(null); // 사용자 정보 상태
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (jwtUtils.isAuth(token)) { // 토큰이 유효한 경우에만 사용자 정보 가져오기
+        const userId = jwtUtils.getUserId(token);
+        const nickname = await jwtUtils.getNickname(token);
+        setUserInfo({ userId, nickname });
+      }
+    };
+
+    fetchUserInfo();
+  }, [token]);
 
   return (
     <Router>
       <ScrollToTop />
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar isLoggedIn={!!userInfo} />
       <Routes>
         <Route path="/Main/*" element={<Main />} />
         <Route
           path="/"
           element={
-            <Main>
-              <Route path="/" element={<Section id="mainSection" />} />
-              <Route
-                path="/howToUse"
-                element={<Section id="howToUseSection" />}
-              />
-              <Route
-                path="/aboutUs"
-                element={<Section id="aboutUsSection" />}
-              />
-            </Main>
+            <Main/>
           }
         />
         <Route path="/Forum" element={<PrivateRoute component={Forum} />} />
