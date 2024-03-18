@@ -224,7 +224,7 @@ export const fetchUserInfo = async (token) => {
 export const getMyForumPosts = async (page) => {
   try {
     const response = await client.get(
-      `/posts/post/?page=${page}`
+      `/accounts/mypost/?page=${page}`
     );
     const postWithComments = response.data.results.map((post) => ({
       ...post,

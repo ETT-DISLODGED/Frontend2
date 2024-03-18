@@ -14,13 +14,17 @@
 }
 
 .section2 {
-  background-color: #ccffcc; /* 두 번째 섹션의 배경색 설정 */
+  background-image: url('/assets/mainwave.gif');
 }
 
 .section3 {
-  background-color: #ccccff; /* 세 번째 섹션의 배경색 설정 */
+  background-image: url('/assets/mainwave.gif');
 }
 .section img {
   width: 50%; /* 이미지의 너비를 50%로 조절 */
   height: auto; /* 높이는 자동으로 조절되도록 설정 */
+}
+
+p{
+  font-size: 19px;
 }
