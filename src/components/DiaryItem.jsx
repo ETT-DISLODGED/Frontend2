@@ -28,7 +28,7 @@ const DiaryItem = ({ id, title, content, created_at, commentCount }) => {
         <span className="post-date">{strDate}</span>
       </div>
       <div className="post-card-body">
-        <p>{displayedContent}</p>
+        <p className="forum-content">{displayedContent}</p>
       </div>
       <div className="comment-count">
         <img
