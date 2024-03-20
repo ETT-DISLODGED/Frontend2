@@ -1,2 +1,23 @@
+/* global.css */
 
- 
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Navbar component styling */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navbar stays on top */
+    /* Other styling properties */
+  }
+  
+  /* Main component styling */
+  .main-content {
+    margin-top: 60px; /* Adjust margin top to accommodate the navbar */
+    /* Other styling properties */
+  }
+  

@@ -5,7 +5,6 @@
   padding: 20px;
   border-radius: 8px;
   justify-content: center;
-
   position: fixed;
   bottom: 0; /* 아래쪽으로는 화면 끝까지 */
   top: 15%; /* 화면의 정중앙부터 시작 */

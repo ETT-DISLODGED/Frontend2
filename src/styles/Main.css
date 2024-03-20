@@ -1,5 +1,7 @@
+
 .section {
-  width: 100%;
+  width: 83%; /* 가로 크기를 80%로 설정합니다. */
+  margin: 0 auto; /* 가로 중앙 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,10 +12,6 @@
 }
 
 .section1 {
-  background-image: url('/assets/mainwave.gif');
-}
-
-.section2 {
   background-image: url('/assets/mainwave.gif');
 }
 

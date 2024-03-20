@@ -55,7 +55,9 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Main/>
+            <div className="main-content"> 
+            <Main />
+          </div>
           }
         />
         <Route path="/Forum" element={<PrivateRoute component={Forum} />} />
