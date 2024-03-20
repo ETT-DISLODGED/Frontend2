@@ -1,12 +1,19 @@
-const SET_TOKEN = "set_token";
+const SET_TOKEN = "SET_TOKEN";
+const SET_REFRESH_TOKEN = 'SET_REFRESH_TOKEN';
 
 const AuthInitialState = {
-  token: null
+  token: null,
+  refreshToken: null // Add refreshToken to the initial state
 };
 
 export const setToken = (token) => ({
   type: SET_TOKEN,
   token
+});
+
+export const setRefreshToken = (refreshToken) => ({
+  type: SET_REFRESH_TOKEN,
+  refreshToken
 });
 
 export const AuthReducer = (state = AuthInitialState, action) => {
@@ -15,6 +22,11 @@ export const AuthReducer = (state = AuthInitialState, action) => {
       return {
         ...state,
         token: action.token
+      };
+    case SET_REFRESH_TOKEN:
+      return {
+        ...state,
+        refreshToken: action.refreshToken
       };
     default:
       return state;

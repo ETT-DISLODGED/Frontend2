@@ -24,7 +24,7 @@ const DiaryItem = ({ id, title, content, created_at, commentCount }) => {
       onClick={() => navigate(`/detail/${id}`)}
     >
       <div className="post-card-header">
-        <h3 className="post-title">{title}</h3>
+        <span className="post-title">{title}</span>
         <span className="post-date">{strDate}</span>
       </div>
       <div className="post-card-body">

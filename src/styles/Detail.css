@@ -70,6 +70,7 @@
 }
 
 .detail_button {
+  display: flex;
   text-align: left; /* 버튼을 왼쪽으로 정렬 */
   padding-left: calc(
     20% + 10px
@@ -94,6 +95,7 @@
 
 /* 댓글 입력란 전체 컨테이너 */
 .inputComment {
+  margin-top: 50px;
   background-color: black; /* 배경 색상 */
   padding: 20px; /* 내부 여백 */
   border-radius: 10px; /* 모서리 둥글게 */
@@ -169,4 +171,39 @@ form {
 /* 호버 효과 */
 .inputComment button:hover {
   background-color: #ff17e5; /* 버튼 배경 색상 변경 */
+}
+
+@media (max-width: 768px) {
+  .DetailPage {
+    padding: 10px; /* 내부 여백을 줄임 */
+  }
+
+  .title {
+    font-size: 24px; /* 제목 글꼴 크기를 더 크게 조정 */
+  }
+
+  .etc {
+    font-size: 14px; /* 부가 정보의 글꼴 크기를 줄임 */
+  }
+
+  .content {
+    font-size: 16px; /* 본문 내용의 글꼴 크기를 줄임 */
+  }
+
+  .detail_button button {
+    font-size: 14px; /* 버튼의 글꼴 크기를 줄임 */
+  }
+
+  .detail_author,
+  .detail_date,
+  .detail_commentNum {
+    /* 모바일 화면에 맞게 스타일 조정 */
+    font-size: 15px; /* 텍스트 크기 줄임 */
+    margin-right: 8px;
+  }
+
+  .comment2 {
+    width: 20px; /* 이미지 크기 줄임 */
+    height: auto; /* 비율 유지 */
+  }
 }

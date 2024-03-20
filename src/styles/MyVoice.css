@@ -1,0 +1,211 @@
+.myVoice {
+  color: white; /* 기본 글자 색상 */
+  position: fixed;
+  top: 30%; /* 화면의 정중앙부터 시작 */
+  bottom: 0; /* 아래쪽으로는 화면 끝까지 */
+  width: 100%;
+  font-family: "나눔고딕", sans-serif; /* 글씨체 */
+  text-align: center;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+
+.voice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto; /*왼쪽으로 치우쳐진 게 중앙으로 오도록*/
+  margin-bottom: 60px;
+  width: 50%;
+}
+
+.speed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto; /*왼쪽으로 치우쳐진 게 중앙으로 오도록 */
+  margin-bottom: 60px;
+  margin-top: 60px;
+  width: 50%;
+}
+
+.pitch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto; /*왼쪽으로 치우쳐진 게 중앙으로 오도록 */
+  margin-bottom: 60px;
+  margin-top: 60px;
+  width: 50%;
+}
+
+.voice_radio {
+  width: 70%;
+}
+
+.voice_select {
+  margin-right: 20px;
+}
+/* value값이랑 range바를 수직으로 배치 */
+.speed_two {
+  width: 70%;
+  flex-direction: column;
+}
+/* value값이랑 range바를 수직으로 배치 */
+.pitch_two {
+  width: 70%;
+  flex-direction: column;
+}
+
+.speedWord {
+  color: white;
+}
+.speed_select {
+  padding-top: 10px;
+}
+
+.pitchWord {
+  color: White;
+}
+.pitch_select {
+  padding-top: 10px;
+}
+
+.voice_radio {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+}
+/* 빠르기 조절 */
+
+.speed-range {
+  -webkit-appearance: none; /* 오버라이드 기본 스타일 */
+  appearance: none;
+  /*width: 50%; /* 슬라이더의 전체 폭 */
+  width: calc(100% - 20px);
+  height: 5px; /* 슬라이더의 높이 */
+  background: white; /* 슬라이더의 배경색 */
+  outline: none; /* 포커스 테두리 제거 */
+  opacity: 1; /* 슬라이더의 불투명도 */
+  -webkit-transition: 0.2s; /* 트랜지션 효과 */
+  transition: opacity 0.2s;
+  width: 400px;
+}
+.speed-range::-webkit-slider-thumb {
+  -webkit-appearance: none; /* 핸들 기본 스타일 제거 */
+  appearance: none;
+  width: 15px; /* 핸들의 폭 */
+  height: 15px; /* 핸들의 높이 */
+  background: #ff17e5; /* 핸들의 배경색 */
+  cursor: pointer; /* 커서 모양 */
+}
+
+.speed-range::-moz-range-thumb {
+  width: 15px; /* 핸들의 폭 */
+  height: 15px; /* 핸들의 높이 */
+  background: #ff17e5; /* 핸들의 배경색 */
+  cursor: pointer; /* 커서 모양 */
+}
+
+/* 피치 조절 */
+
+.pitch-range {
+  -webkit-appearance: none; /* 오버라이드 기본 스타일 */
+  appearance: none;
+  width: calc(100% - 20px); /* 슬라이더의 전체 폭 */
+  height: 5px; /* 슬라이더의 높이 */
+  background: white; /* 슬라이더의 배경색 */
+  outline: none; /* 포커스 테두리 제거 */
+  opacity: 1; /* 슬라이더의 불투명도 */
+  -webkit-transition: 0.2s; /* 트랜지션 효과 */
+  transition: opacity 0.2s;
+  width: 400px;
+}
+.pitch-range::-webkit-slider-thumb {
+  -webkit-appearance: none; /* 핸들 기본 스타일 제거 */
+  appearance: none;
+  width: 15px; /* 핸들의 폭 */
+  height: 15px; /* 핸들의 높이 */
+  background: #ff17e5; /* 핸들의 배경색 */
+  cursor: pointer; /* 커서 모양 */
+}
+
+.pitch-range::-moz-range-thumb {
+  width: 15px; /* 핸들의 폭 */
+  height: 15px; /* 핸들의 높이 */
+  background: #ff17e5; /* 핸들의 배경색 */
+  cursor: pointer; /* 커서 모양 */
+}
+
+.voice_letter,
+.speed_letter,
+.pitch_letter {
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.voice_select,
+.speed_select,
+.pitch_select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="radio"] {
+  margin: 0 10px;
+  accent-color: magenta; /* This will change the color of the radio button */
+}
+
+.voice_letter,
+.speed_letter,
+.pitch_letter {
+  display: inline-block;
+  border: 2px solid magenta; /* 테두리 색상을 흰색으로 설정 */
+  border-radius: 50%; /* 원형 테두리를 만들기 위한 설정 */
+  width: 140px; /* 원의 가로 크기 */
+  height: 140px; /* 원의 세로 크기 */
+  line-height: 140px; /* 텍스트를 수직 중앙으로 정렬하기 위한 설정 */
+  text-align: center; /* 텍스트를 가로 중앙으로 정렬하기 위한 설정 */
+  margin: 10px; /* 주변 요소와의 간격을 설정 */
+  font-size: 1.5em; /* 글씨 크기를 조절 */
+  color: white; /* 글씨 색상을 흰색으로 설정 */
+}
+
+.range-value {
+  color: white;
+}
+
+.range-min {
+  margin-right: 10px;
+}
+
+.range-max {
+  margin-left: 10px;
+}
+.play {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.playContent {
+  display: flex;
+  align-items: center;
+}
+
+.playLetter {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.play_button {
+  width: 60px; /* 이미지 크기 설정 */
+  height: auto; /* 이미지 비율 유지 */
+}
+
+.save_voice {
+  border: 3px solid #ff17e5;
+}

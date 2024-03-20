@@ -28,7 +28,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
   const [group, setGroup] = useState(groups[0]);
-  const [level, setLevel] = useState(3);
+  const [level, setLevel] = useState(2);
   const [content, setContent] = useState(""); // 작성한 content의 상태 저장
 
   const tagRef = useRef();
@@ -128,18 +128,18 @@ const DiaryEditor = ({ isEdit, originData }) => {
         headText={isEdit ? "수정하기" : "글 쓰기"} //edit인지 아닌지에 따라 header 달라짐
       />
       <div className="editorForm">
-        <h4>날짜 </h4>
+        <span className="editForm-date">날짜 </span>
         <div className="editor-date">{created_at}</div>
-        <h4>태그</h4>
+        <span className="editForm-tag">태그</span>
         <input
           className="tag-input"
           type="text"
-          placeholder="댓글 모아들을 때 사용할 태그(1-8글자까지 입력)"
+          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-8글자까지 입력)"
           value={tag}
           ref={tagRef}
           onChange={handleTagChange}
         />
-        <h4>제목</h4>
+        <span className="editForm-title">제목</span>
         <input
           className="title-input"
           type="text"
@@ -148,7 +148,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
           ref={titleRef}
           onChange={handleTitleChange}
         />
-        <h4>게시판</h4>
+        <span className="editForm-category">게시판</span>
         <div className="categorySelector">
           {groups.map((grou) => (
             <button
@@ -166,28 +166,30 @@ const DiaryEditor = ({ isEdit, originData }) => {
           ))}
         </div>
         <div className="severity-container">
-          <h4>심각도(1~5)</h4>
+          <span className="editForm-severity">심각도(1~3)</span>
           <p className="severity-description">
             자신의 고민에 대한 심각도를 표시해주세요 *본인만 확인 가능
           </p>{" "}
         </div>
-        <span>{level}</span>
+        <span className="editorForm-level">{level}</span>
         <div className="severitySelector">
+          <span className="range-value range-min">1</span>
           <input
             type="range"
             id="level"
             name="level"
             min="1"
-            max="5"
+            max="3"
             value={level}
             onChange={handleLevelChange}
             className="severity-range"
           />
+          <span className="range-value range-min">3</span>
         </div>
-        <h4>본문내용</h4>
+        <span className="editForm-text">본문내용</span>
         <div className="input_box text_wrapper">
           <textarea
-            placeholder="고민을 적어주세요?"
+            placeholder="고민을 적어주세요!"
             ref={contentRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
