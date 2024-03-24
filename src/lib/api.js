@@ -277,7 +277,7 @@ export const getMyForumPosts = async (page) => {
     }));
     return {
       postWithComments,
-      totalCount: response.data.count // 전체 포스트 수
+      totalCount: response.data.total // 전체 포스트 수
     };
   } catch (error) {
     console.error("내가 작성한 게시물 목록을 가져오는 데 실패했습니다:", error);
