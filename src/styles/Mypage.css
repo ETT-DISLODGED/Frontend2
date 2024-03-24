@@ -1,20 +1,14 @@
-/* Forum.jsx */
+
 .mypage {
   background-color: black;
   color: #fff;
   padding: 20px;
   border-radius: 8px;
-
   position: fixed;
-
   bottom: 0; /* 아래쪽으로는 화면 끝까지 */
-
   top: 15%; /* 화면의 정중앙부터 시작 */
-
   overflow: auto;
-
   box-sizing: border-box; /* 패딩과 테두리를 너비에 포함 */
-
   width: 100%;
 }
 
@@ -47,7 +41,7 @@
   border: 3px solid #ff17e5;
 }
 
-.write {
+.logout {
   display: flex;
   justify-content: flex-end;
   padding-right: 30px;
@@ -136,7 +130,7 @@
   border-radius: 4px;
 }
 
-.write-button {
+.logout-button {
   background-color: black;
   color: white;
   border: 1px solid white;

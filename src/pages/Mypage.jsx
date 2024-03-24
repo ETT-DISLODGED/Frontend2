@@ -39,7 +39,7 @@ const Mypage = () => {
       try {
         const { postWithComments, totalCount } = await getMyForumPosts(page);
         setPostList(postWithComments);
-        setPageCount(Math.ceil(totalCount / 6));
+        setPageCount(Math.ceil(totalCount / 4));
       } catch (error) {
         console.error("내가 작성한 게시글을 가져오는 데 실패했습니다:", error);
       }
@@ -52,8 +52,8 @@ const Mypage = () => {
       <div className="mypage-header">
         <h3>마이페이지</h3>
       </div>
-      <div className="write">
-        <button className="write-button" onClick={logout}>
+      <div className="logout">
+        <button className="logout-button" onClick={logout}>
           로그아웃
         </button>
       </div>
@@ -61,8 +61,8 @@ const Mypage = () => {
       <div className="mypage-footer">
         <Pagination
           activePage={Number(page)}
-          itemsCountPerPage={6}
-          totalItemsCount={pageCount * 6}
+          itemsCountPerPage={4}
+          totalItemsCount={pageCount * 4}
           pageRangeDisplayed={5}
           prevPageText={"‹"}
           nextPageText={"›"}
