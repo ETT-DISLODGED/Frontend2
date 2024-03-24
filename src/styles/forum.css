@@ -5,7 +5,6 @@
   padding: 20px;
   border-radius: 8px;
   justify-content: center;
-
   position: fixed;
   bottom: 0; /* 아래쪽으로는 화면 끝까지 */
   top: 15%; /* 화면의 정중앙부터 시작 */
@@ -124,6 +123,9 @@
   /*margin-bottom: 10px;*/
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.forum-content {
+  font-size: 15px;
 }
 
 .button {
@@ -309,6 +311,9 @@ ul.pagination li a.active {
     width: 20px; /* 이미지 크기 설정 */
     height: auto; /* 이미지 비율 유지 */
   }
+  .forum-contet {
+    font-size: 13px;
+  }
 }
 
 /* 화면 크기가 480px 이하일 때의 스타일 */
@@ -355,5 +360,9 @@ ul.pagination li a.active {
   .write-button {
     padding: 6px 12px;
     font-size: 10px;
+  }
+
+  .forum-content {
+    font-size: 11px;
   }
 }

@@ -35,16 +35,16 @@ const Mypage = () => {
   };
 
   useEffect(() => {
-    const getPostList = async () => {
+    const getMyPostList = async () => {
       try {
         const { postWithComments, totalCount } = await getMyForumPosts(page);
         setPostList(postWithComments);
         setPageCount(Math.ceil(totalCount / 6));
       } catch (error) {
-        console.error("포럼 게시물을 가져오는 중 오류가 발생했습니다:", error);
+        console.error("내가 작성한 게시글을 가져오는 데 실패했습니다:", error);
       }
     };
-    getPostList();
+    getMyPostList();
   }, [searchParams, page]);
 
   return (

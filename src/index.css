@@ -22,6 +22,7 @@ a:hover {
 }
 
 body {
+  
   background-color: black; /* 전체 배경색 설정 */
   margin: 0;
   place-items: center;

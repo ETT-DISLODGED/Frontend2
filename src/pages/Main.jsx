@@ -7,10 +7,10 @@ const Main = () => {
   return (
     <div className="main-container">
       <section className="section section1">
-        {/* 첫 번째 섹션 내용 */}
       </section>
       <section className="section section2">
         <div className="section2-content">
+          {/* <img src="/public/assets/neonwave.png" alt="Image" className="section2-image" /> */}
           <p>DISLODGED사용법 사용법 섹션입니다.
             예예 사용법섹션입니다. 사용법예예예
           </p>
