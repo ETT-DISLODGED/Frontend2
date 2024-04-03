@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux"; // useDispatch를 추가합니다.
 import "../styles/Mypage.css";
-import DiaryList from "../components/DiaryList";
+import MypageList from "../components/MypageList";
 import { getMyForumPosts } from "../lib/api";
 import Pagination from "react-js-pagination";
 import { setToken } from "../redux/reducers/AuthReducer";
@@ -57,7 +57,7 @@ const Mypage = () => {
           로그아웃
         </button>
       </div>
-      <DiaryList diaryList={postList} />
+      <MypageList mypageList={postList} />
       <div className="mypage-footer">
         <Pagination
           activePage={Number(page)}
