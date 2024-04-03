@@ -200,7 +200,7 @@ const Signup = () => {
           inputProps={{ minLength: 8 }} 
          />
           {passwordError && ( // 비밀번호 일치 오류가 있을 때만 표시
-                    <p style={{ color: "red" }}>비밀번호가 일치하지 않습니다. 다시 확인해주세요.</p>
+                    <p style={{ color: "hotpink", fontSize: "14px"  }}>비밀번호가 일치하지 않습니다. 다시 확인해주세요.</p>
                 )}
         <StyledTextField
           style={inputStyles}
