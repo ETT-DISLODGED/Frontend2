@@ -300,3 +300,22 @@ export const voiceInfo = async () => {
     throw error;
   }
 };
+
+//  생성한 음성 재생
+export const playVoice = async (text, speed, pitch, type) => {
+  try {
+    const response = await client.get(
+      `/posts/tts/?text=${text}&speed=${speed}&pitch=${pitch}&type=${type}`,
+      { responseType: "blob" }
+    );
+    const blob = new Blob([response.data], { type: "audio/wav" });
+
+    // Blob URL 생성
+    const blobUrl = URL.createObjectURL(blob);
+
+    // Audio 객체 생성 및 재생
+    new Audio(blobUrl).play();
+  } catch (error) {
+    console.error("음성 재생 중 오류 발생:", error);
+  }
+};
