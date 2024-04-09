@@ -3,10 +3,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux"; // useDispatch를 추가합니다.
 import "../styles/Mypage.css";
 import MypageList from "../components/MypageList";
+
 import { getMyForumPosts } from "../lib/api";
 import Pagination from "react-js-pagination";
 import { setToken } from "../redux/reducers/AuthReducer";
-
 
 const Mypage = () => {
   const dispatch = useDispatch(); // useDispatch를 사용하여 dispatch 함수를 가져옵니다.
@@ -15,8 +15,6 @@ const Mypage = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [postList, setPostList] = useState([]);
- 
-
 
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber);
@@ -31,6 +29,7 @@ const Mypage = () => {
     // 로그아웃 액션을 dispatch 합니다.
     dispatch(setToken(""));
     alert("로그아웃 완료");
+
     navigate("/");
   };
 

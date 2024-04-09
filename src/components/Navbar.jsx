@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
+import { useSelector } from "react-redux"; // useSelector를 가져옵니다.
 
-const Navbar = ({ isLoggedIn }) => {
+const Navbar = () => {
+  const isLoggedIn = useSelector((state) => !!state.Auth.token); // Redux 상태에서 로그인 여부를 가져옵니다. 사용자가 로그인했는지의 여부를 불리언 값으로 isLoggedIn에 저장. 토큰이 있으면 사용자가 로그인한 것으로 간주하고 isLoggedIn은 true가 되며, 그렇지 않다면 false.
+
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
@@ -31,27 +34,25 @@ const Navbar = ({ isLoggedIn }) => {
           <li>
             <Link to="/myvoice">나만의보이스</Link>
           </li>
-          
-  
         </ul>
-    
-      <div className="button-container">
-        {isLoggedIn ? (
-          <div className="ProfileButton" onClick={navigateToMyPage}>
-            <PersonIcon sx={{ fontSize: 34, color: 'white' }} />
-          </div>
-        ) : (
-          <div className="LoginButton">
-            <Button
-              variant="outlined" 
-              style={{ bottom: "6px" }}
-              onClick={navigateToLogin}
-            >
-              로그인
-            </Button>
-          </div>
-        )}
-      </div>
+
+        <div className="button-container">
+          {isLoggedIn ? (
+            <div className="ProfileButton" onClick={navigateToMyPage}>
+              <PersonIcon sx={{ fontSize: 34, color: "white" }} />
+            </div>
+          ) : (
+            <div className="LoginButton">
+              <Button
+                variant="outlined"
+                style={{ bottom: "6px" }}
+                onClick={navigateToLogin}
+              >
+                로그인
+              </Button>
+            </div>
+          )}
+        </div>
       </ul>
     </nav>
   );
