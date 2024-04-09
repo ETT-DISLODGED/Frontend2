@@ -209,3 +209,176 @@ input[type="radio"] {
 .save_voice {
   border: 3px solid #ff17e5;
 }
+
+/* 화면 폭이 768px 미만일 때 */
+@media (max-width: 768px) {
+  .myVoice {
+    top: 30%;
+    width: 90%;
+    padding: 0 20px;
+  }
+
+  .voice {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .speed {
+    margin: 0 auto;
+    width: 80%;
+  }
+  .pitch {
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  .voice_radio,
+  .speed_two,
+  .pitch_two {
+    width: 65%;
+  }
+  .voice_select,
+  .speed_select,
+  .pitch_select {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .voice_letter,
+  .speed_letter,
+  .pitch_letter {
+    width: 130px; /* 작은 화면에서의 원의 가로 크기 조정 */
+    height: 130px; /* 작은 화면에서의 원의 세로 크기 조정 */
+    border-radius: 50%;
+    line-height: 125px; /* 텍스트를 수직 중앙으로 정렬하는 높이 조정 */
+    font-size: 20px; /* 작은 화면에서의 글씨 크기 조정 */
+  }
+
+  .speed-range,
+  .pitch-range {
+    width: 100%;
+  }
+
+  .voice_select label {
+    font-size: 18px; /* 더 작은 화면에서 글씨 크기 더 줄임 */
+  }
+
+  /*
+  .play {
+    flex-direction: column;
+    width: 100%;
+  }*/
+  .play {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+
+  .save_voice,
+  .play_button {
+    margin: 10px 0;
+  }
+
+  .playLetter {
+    font-size: 18px;
+  }
+  .play_button {
+    width: 45px;
+  }
+
+  .save_voice {
+    font-size: 16px;
+  }
+}
+
+/* 화면 폭이 480px 미만일 때 */
+@media (max-width: 480px) {
+  .myVoice {
+    top: 30%;
+    width: 90%;
+    padding: 0 20px;
+  }
+  .voice {
+    margin: 0 auto;
+    width: 90%;
+  }
+  .speed {
+    margin: 0 auto;
+    width: 90%;
+  }
+  .pitch {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  .voice_radio {
+    width: 60%;
+  }
+
+  .speed_two,
+  .pitch_two {
+    width: 65%;
+  }
+  .voice_letter,
+  .speed_letter,
+  .pitch_letter {
+    width: 100px; /* 작은 화면에서의 원의 가로 크기 조정 */
+    height: 100px; /* 작은 화면에서의 원의 세로 크기 조정 */
+    border-radius: 50%;
+    line-height: 100px; /* 텍스트를 수직 중앙으로 정렬하는 높이 조정 */
+    font-size: 14px; /* 작은 화면에서의 글씨 크기 조정 */
+  }
+
+  .voice_select label {
+    font-size: 13px; /* 더 작은 화면에서 글씨 크기 더 줄임 */
+  }
+
+  .speed-range {
+    width: calc(100% - 20px);
+    height: 3px; /* 슬라이더의 높이 */
+  }
+
+  .speed-range::-webkit-slider-thumb {
+    width: 12px; /* 핸들의 폭 */
+    height: 12px; /* 핸들의 높이 */
+  }
+  .speed-range::-moz-range-thumb {
+    width: 12px; /* 핸들의 폭 */
+    height: 12px; /* 핸들의 높이 */
+  }
+
+  .pitch-range {
+    width: calc(100% - 20px);
+    height: 3px; /* 슬라이더의 높이 */
+  }
+
+  .pitch-range::-webkit-slider-thumb {
+    width: 12px; /* 핸들의 폭 */
+    height: 12px; /* 핸들의 높이 */
+  }
+  .pitch-range::-moz-range-thumb {
+    width: 12px; /* 핸들의 폭 */
+    height: 12px; /* 핸들의 높이 */
+  }
+
+  .range-min,
+  .range-max {
+    font-size: 13px;
+  }
+
+  .play {
+    width: 90%;
+  }
+  .playLetter {
+    font-size: 14px;
+  }
+  .play_button {
+    width: 35px;
+  }
+
+  .save_voice {
+    font-size: 13px;
+  }
+}

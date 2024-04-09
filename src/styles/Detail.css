@@ -39,6 +39,8 @@
 .detail_author {
   margin-left: 10px;
   font-size: 23px;
+  display: flex;
+  flex-direction: row;
 }
 
 .detail_commentNum {
@@ -206,4 +208,7 @@ form {
     width: 20px; /* 이미지 크기 줄임 */
     height: auto; /* 비율 유지 */
   }
+}
+
+@media (max-width: 480px) {
 }

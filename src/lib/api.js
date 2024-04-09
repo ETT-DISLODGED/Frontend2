@@ -330,3 +330,5 @@ export const forumPlayInfo = async (content, speed, pitch, type) => {
     console.error("게시글 음성 재생 중 오류 발생:", error);
   }
 };
+
+
