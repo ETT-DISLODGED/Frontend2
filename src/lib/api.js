@@ -319,3 +319,16 @@ export const playVoice = async (text, speed, pitch, type) => {
     console.error("음성 재생 중 오류 발생:", error);
   }
 };
+
+export const forumPlayInfo = async (content, speed, pitch, type) => {
+  try {
+    //유미한테 author_id을 통해 type, speed, pitch 받아오는 api호출하기(await로)
+    //await
+    //console.log(author, content);
+    await playVoice(content, speed, pitch, type);
+  } catch (error) {
+    console.error("게시글 음성 재생 중 오류 발생:", error);
+  }
+};
+
+
