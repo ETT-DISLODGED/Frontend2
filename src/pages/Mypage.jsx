@@ -49,7 +49,7 @@ const Mypage = () => {
   return (
     <div className="mypage">
       <div className="mypage-header">
-        <h3>마이페이지</h3>
+        <h2>마이페이지</h2>
       </div>
       <div className="logout">
         <button className="logout-button" onClick={logout}>

@@ -54,6 +54,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px; /* 게시글 사이의 간격 조절 */
+  margin-top: 30px;
   margin-bottom: 20px; /* 페이지네이션과의 간격 */
   padding-left: 60px;
   padding-right: 60px;
