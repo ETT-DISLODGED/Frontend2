@@ -93,6 +93,8 @@ const Login = () => {
 
       dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
       dispatch(setRefreshToken(response.token.refresh));
+      const message = response.message;
+      alert(message);
 
       navigate("/main");
     } catch (error) {
