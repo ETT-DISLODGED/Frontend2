@@ -27,7 +27,7 @@
 .speed {
   display: flex;
   text-align: center;
-  font-size : 16px;
+  font-size: 16px;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto; /*왼쪽으로 치우쳐진 게 중앙으로 오도록 */
@@ -37,7 +37,7 @@
 
 .pitch {
   display: flex;
-  font-size : 16px;
+  font-size: 16px;
   align-items: center;
   text-align: center;
   justify-content: space-between;
@@ -52,7 +52,6 @@
 
 .voice_select {
   margin-left: 20px;
-
 }
 /* value값이랑 range바를 수직으로 배치 */
 .speed_two {
@@ -178,7 +177,7 @@ input[type="radio"] {
   line-height: 110px; /* 텍스트를 수직 중앙으로 정렬하기 위한 설정 */
   text-align: center; /* 텍스트를 가로 중앙으로 정렬하기 위한 설정 */
   margin: 10px; /* 주변 요소와의 간격을 설정 */
- 
+
   color: white; /* 글씨 색상을 흰색으로 설정 */
 }
 
@@ -222,6 +221,7 @@ input[type="radio"] {
   border: 2px solid #ff17e5;
   margin-top: 10px;
   background: black;
+  color: white;
 }
 
 /* 화면 폭이 768px 미만일 때 */
@@ -271,8 +271,8 @@ input[type="radio"] {
   .pitch-range {
     width: 100%;
   }
-  
-  .voice_select{
+
+  .voice_select {
     margin-left: 10px;
   }
 
@@ -280,7 +280,7 @@ input[type="radio"] {
     font-size: 13px; /* 더 작은 화면에서 글씨 크기 더 줄임 */
   }
 
-  h2{
+  h2 {
     font-size: 16px;
   }
   /*
@@ -352,7 +352,7 @@ input[type="radio"] {
     line-height: 100px; /* 텍스트를 수직 중앙으로 정렬하는 높이 조정 */
     font-size: 14px; /* 작은 화면에서의 글씨 크기 조정 */
   }
-  .voice_select{
+  .voice_select {
     margin-left: 10px;
   }
 
