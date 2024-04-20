@@ -2,10 +2,16 @@ import DiaryItem from "./DiaryItem";
 import "../styles/forum.css";
 
 const DiaryList = ({ diaryList }) => {
+  // 작성된 날짜를 기준으로 내림차순 정렬
+  const sortedDiaryList = diaryList.sort((a, b) => {
+    // 날짜를 Date 객체로 변환하여 비교
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+
   return (
     <div className="forum-body">
-      {diaryList.length > 0 ? (
-        diaryList.map((post) => (
+      {sortedDiaryList.length > 0 ? (
+        sortedDiaryList.map((post) => (
           <DiaryItem
             key={post.id}
             id={post.id}

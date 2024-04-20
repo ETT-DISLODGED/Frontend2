@@ -202,23 +202,6 @@ header .head_text {
   margin-left: 10px;
 }
 
-/* 슬라이더 핸들 (thumb) 스타일 */
-.severity-range::-webkit-slider-thumb {
-  -webkit-appearance: none; /* 핸들 기본 스타일 제거 */
-  appearance: none;
-  width: 15px; /* 핸들의 폭 */
-  height: 15px; /* 핸들의 높이 */
-  background: #ff17e5; /* 핸들의 배경색 */
-  cursor: pointer; /* 커서 모양 */
-}
-
-.severity-range::-moz-range-thumb {
-  width: 15px; /* 핸들의 폭 */
-  height: 15px; /* 핸들의 높이 */
-  background: #ff17e5; /* 핸들의 배경색 */
-  cursor: pointer; /* 커서 모양 */
-}
-
 @media (max-width: 768px) {
   .DiaryEditor {
     width: 70%;
