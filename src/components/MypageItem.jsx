@@ -29,6 +29,7 @@ const MypageItem = ({id, created_at, tag, picture }) => {
 
   return (
     <div className="albumCover">
+      <div className="tag">TR #{tag}</div>
       <div className="circle">
         {/* 이미지와 버튼을 함께 래핑하는 컨테이너 */}
         <div
@@ -58,7 +59,7 @@ const MypageItem = ({id, created_at, tag, picture }) => {
           )}
         </div>
       </div>
-      <div className="tag">#{tag}</div>
+
     </div>
   );
 };
