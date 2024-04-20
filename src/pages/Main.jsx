@@ -1,34 +1,48 @@
 import React from "react";
-import { Link } from "react-router-dom"; // React Router의 Link 컴포넌트를 불러옵니다.
+import { Link } from "react-router-dom";
 import "../styles/Main.css";
-//import mainGif from "/assets/mainwave.gif";
+import { styled } from "@mui/system";
+import Button from "@mui/material/Button";
+import mouseImage from "/assets/mouse.png"; // 이미지 경로를 import 합니다.
+
+const Container = styled("div")({
+  display: "flex",
+  alignItems: "center",
+});
+
+const GradientButton = styled(Button)({
+  marginTop: "20px",
+  width: "200px",
+  padding: "10px",
+  color: "white",
+  background: "linear-gradient(45deg, #FF0A99 30%, #00FFF0 90%)",
+  "&:hover": {
+    background: "linear-gradient(45deg, #FF0A99 60%, #00FFF0 90%)"
+  },
+  "&:active, &:focus": {
+    outline: "none"
+  },
+  fontFamily: "gamtan-font-r",
+});
+
+const MouseImage = styled("img")({
+  marginLeft: "7px", // 이미지와 버튼 사이 간격 조절
+  width: "20px", // 이미지의 너비 조절
+  marginTop:"50px"
+});
 
 const Main = () => {
   return (
-    <div className="main-container">
-      <section className="section section1">
-      </section>
-      <section className="section section2">
-        <div className="section2-content">
-          {/* <img src="/public/assets/neonwave.png" alt="Image" className="section2-image" /> */}
-          <p>DISLODGED사용법 사용법 섹션입니다.
-            예예 사용법섹션입니다. 사용법예예예
-          </p>
-          <Link to="/myvoice">
-            <button>나만의 가상 보이스 생성하기</button> 
-          </Link>
-        </div>
-      </section>
-      <section className="section section3">
-      <div className="section3-content">
-          <p>이건 왜 만들었을까?
-            우리가 누구인지 궁금합니까.
-            어떤 기술들이 쓰였는지 알고싶나요
-            예 저도 그렇습니다.</p>
-            <p>의견이나 건의사항이 있다면 알려주세요</p>
-            <button>Contact us</button> 
-        </div>
-      </section>
+    <div className="section section1">
+      <div className="main-container">
+        <Container>
+          
+          <GradientButton variant="outlined">
+            서비스 사용법 보러가기
+          </GradientButton>
+          <MouseImage src={mouseImage} alt="mouse" /> {/* 이미지를 추가합니다. */}
+        </Container>
+      </div>
     </div>
   );
 };

@@ -57,7 +57,8 @@ const GradientButton = styled(Button)({
   },
   "&:active, &:focus": {
     outline: "none" // Remove outline on click/focus
-  }
+  },
+  fontFamily: "gamtan-font-r",
 });
 
 const StyledTextField = styled(TextField)(inputStyles);

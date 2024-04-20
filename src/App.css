@@ -35,3 +35,20 @@
   border-radius: 20px; /* 스크롤바 모서리 둥글게 */
   border: 3px solid transparent; /* 스크롤바 테두리 */
 }
+
+@font-face {
+  font-family: "hak-font";
+  src: url("./fonts/HakgyoansimTtwimteulR.ttf");
+}
+@font-face {
+  font-family: "seol-font";
+  src: url("./fonts/SEOLEIMcool.ttf");
+}
+@font-face {
+  font-family: "gamtan-font-r";
+  src: url("./fonts/gamtanroad_batang_regular.ttf");
+}
+@font-face {
+  font-family: "gamtan-font-b";
+  src: url("./fonts/gamtanroad_batang_regular.ttf");
+}
