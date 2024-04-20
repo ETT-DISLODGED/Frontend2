@@ -142,7 +142,7 @@ const Detail = () => {
       <div className="DetailPage">
         <div className="title">{data.title}</div>
         <div className="etc">
-          <div className="detail_author">{data.author}</div>
+          <div className="detail_author">{data.author_nickname}</div>
           <div className="detail_date">
             작성시간 :{" "}
             {new Date(data.created_at).toLocaleDateString("ko-KR", {
