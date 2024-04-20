@@ -27,7 +27,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   //const [date, setDate] = useState(formattedDate);
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
-  const [group, setGroup] = useState(groups[0]);
+  const [group, setGroup] = useState("");
   const [level, setLevel] = useState(2);
   const [content, setContent] = useState(""); // 작성한 content의 상태 저장
 
@@ -68,6 +68,14 @@ const DiaryEditor = ({ isEdit, originData }) => {
     return true;
   };
 
+  const validateCategory = (value, message) => {
+    if (value == "") {
+      alert(message);
+      return false;
+    }
+    return true;
+  };
+
   //const { onCreate, onEdit } = useContext(DiaryDispatchContext);
 
   const handleSubmit = async () => {
@@ -85,6 +93,8 @@ const DiaryEditor = ({ isEdit, originData }) => {
       )
     )
       return;
+
+    if (!validateCategory(group, "게시판을 선택해주세요!")) return;
 
     const postData = {
       tag,
