@@ -22,7 +22,7 @@ const GradientButton = styled(Button)({
   "&:active, &:focus": {
     outline: "none"
   },
-  fontFamily: "gamtan-font-r",
+  fontFamily: "hanbit-font",
 });
 
 const MouseImage = styled("img")({
