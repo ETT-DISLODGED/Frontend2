@@ -52,3 +52,7 @@
   font-family: "gamtan-font-b";
   src: url("./fonts/gamtanroad_batang_regular.ttf");
 }
+@font-face {
+  font-family: "hanbit-font";
+  src: url("./fonts/KCC-Hanbit.ttf");
+}

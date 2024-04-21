@@ -33,9 +33,14 @@ const Comment = ({ comments, deleteComment, post_id }) => {
     targetPost();
   }, [token, post_id]);
 
+  // 댓글을 createdAt 기준으로 오름차순 정렬
+  const sortedComments = comments
+    .slice()
+    .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
   return (
     <div className="comments">
-      {comments.map((comment) => {
+      {sortedComments.map((comment) => {
         const createdAt = new Date(comment.created_at);
         const formattedDate = createdAt.toLocaleDateString("ko-KR", {
           year: "numeric",
