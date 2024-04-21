@@ -1,7 +1,7 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+   font-family: "gamtan-font-b";
+    line-height: 1.5;
+    font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -41,13 +41,13 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: "gamtan-font-r";
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #ff17e5;
 }
 button:focus,
 button:focus-visible {
@@ -60,9 +60,25 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #ff17e5;
   }
   button {
     background-color: #f9f9f9;
   }
+}
+@font-face {
+  font-family: "hak-font";
+  src: url("./fonts/HakgyoansimTtwimteulR.ttf");
+}
+@font-face {
+  font-family: "seol-font";
+  src: url("./fonts/SEOLEIMcool.ttf");
+}
+@font-face {
+  font-family: "gamtan-font-r";
+  src: url("./fonts/gamtanroad_batang_regular.ttf");
+}
+@font-face {
+  font-family: "gamtan-font-b";
+  src: url("./fonts/gamtanroad_batang_bold.ttf");
 }

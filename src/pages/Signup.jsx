@@ -57,7 +57,8 @@ const GradientButton = styled(Button)({
   },
   "&:active, &:focus": {
     outline: "none" // Remove outline on click/focus
-  }
+  },
+  fontFamily: "gamtan-font-r",
 });
 
 const StyledTextField = styled(TextField)(inputStyles);
@@ -110,16 +111,18 @@ const Signup = () => {
       
       // 회원가입 요청 보내기
       const response = await signUp(userData);
-      
-      // 회원가입 성공 시 처리
+
+      const message = response.message;
+      alert(message);
       console.log('회원가입 성공:', response);
-      
-      // 성공적으로 회원가입되었다는 메시지 표시 등의 처리
       navigate("/login"); // 로그인 페이지로 이동
     } catch (error) {
-      // 회원가입 실패 시 처리
-      console.error('회원가입 실패:', error);
+        const errorMessage = error.response.data.join("\n");
+        alert(errorMessage);
       
+      // 회원가입 실패 시 처리
+      // console.error('회원가입 실패:', error);
+      // alert(error);
       // 회원가입 실패 메시지 표시 등의 처리
     }
   };

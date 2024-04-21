@@ -12,7 +12,7 @@
 }
 
 header .head_text {
-  font-size: 1.8em; /* 글자 크기 */
+  font-size: 1.5em; /* 글자 크기 */
   border-bottom: 1px solid white; /* 하단에 경계선 추가 */
   width: 70%;
   padding-bottom: 20px;
@@ -55,6 +55,7 @@ header .head_text {
 .editForm-severity {
   margin-top: 20px;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .editor-date {
@@ -108,6 +109,7 @@ header .head_text {
   border: white;
   background-color: white;
   color: black;
+  font-size: 14px;
 }
 
 .on {
@@ -151,39 +153,11 @@ header .head_text {
 
   align-items: center;
   text-align: center;
+  font-size: 14px;
 }
 
 .control_box button:last-child {
   margin-right: 0;
-}
-
-/*심각도*/
-/* 심각도 제목과 설명을 나란히 배열하기 위한 컨테이너 스타일 */
-.severity-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px; /* 여백 조정 */
-}
-
-.severity-container p {
-  font-size: 12px;
-}
-
-/* 심각도 설명 문구의 너비를 조정하고 공간을 효율적으로 사용 */
-.severity-description {
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 18px;
-}
-
-/* 심각도 값을 표시하는 span 스타일 */
-.severity-value {
-  text-align: center;
-  font-weight: bold;
-  margin-right: 10px; /* 입력 슬라이더와의 간격 조정 */
 }
 
 .editorForm-level {
@@ -228,23 +202,6 @@ header .head_text {
   margin-left: 10px;
 }
 
-/* 슬라이더 핸들 (thumb) 스타일 */
-.severity-range::-webkit-slider-thumb {
-  -webkit-appearance: none; /* 핸들 기본 스타일 제거 */
-  appearance: none;
-  width: 15px; /* 핸들의 폭 */
-  height: 15px; /* 핸들의 높이 */
-  background: #ff17e5; /* 핸들의 배경색 */
-  cursor: pointer; /* 커서 모양 */
-}
-
-.severity-range::-moz-range-thumb {
-  width: 15px; /* 핸들의 폭 */
-  height: 15px; /* 핸들의 높이 */
-  background: #ff17e5; /* 핸들의 배경색 */
-  cursor: pointer; /* 커서 모양 */
-}
-
 @media (max-width: 768px) {
   .DiaryEditor {
     width: 70%;
@@ -259,7 +216,7 @@ header .head_text {
   }
   .categoryButton {
     padding: 6px 12px;
-    font-size: 0.8em; /* 더 작은 폰트 크기로 변경 */
+    font-size: 12px; /* 더 작은 폰트 크기로 변경 */
     margin: 3px; /* 탭 사이의 간격을 줄임 */
   }
   .severity-description {
@@ -278,6 +235,6 @@ header .head_text {
     border: 1px solid white;
     background-color: black;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
   }
 }

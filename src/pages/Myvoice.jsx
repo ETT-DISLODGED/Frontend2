@@ -10,7 +10,7 @@ const Myvoice = () => {
   const [speed, setSpeed] = useState(1); //말 빠르기
   const [pitch, setPitch] = useState(0); //피치
   const [ssmlGender, setSsmlGender] = useState("female");
-  const text = "가상보이스 만들기 페이지입니다";
+  const text = "가상보이스 생성이 완료되었습니다.";
 
   // 빠르기 선택 처리 함수
   const handleSpeedChange = (event) => {
@@ -81,6 +81,9 @@ const Myvoice = () => {
 
   return (
     <div className="myVoice">
+      <div className="voice-intro">
+        <h2>가상보이스 생성하기</h2>
+      </div>
       <div className="voice">
         <div className="voice_letter">기본보이스</div>
         <div className="voice_radio">
@@ -174,10 +177,10 @@ const Myvoice = () => {
       </div>
       <div className="play">
         <div className="playContent">
-          <span className="playLetter">내 목소리 들으러가기</span>
+          <span className="playLetter">가상보이스 들으러가기</span>
           <img
             className="play_button"
-            src="/assets/play.png"
+            src="/assets/commentPlay.png"
             alt="play icon"
             onClick={listenVoice}
           />

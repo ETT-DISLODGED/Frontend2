@@ -27,7 +27,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   //const [date, setDate] = useState(formattedDate);
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
-  const [group, setGroup] = useState(groups[0]);
+  const [group, setGroup] = useState("");
   const [level, setLevel] = useState(2);
   const [content, setContent] = useState(""); // 작성한 content의 상태 저장
 
@@ -38,8 +38,8 @@ const DiaryEditor = ({ isEdit, originData }) => {
   // tag 입력 처리
   const handleTagChange = (e) => {
     const { value } = e.target;
-    if (value.length <= 8) {
-      // tag는 최대 8글자까지 허용
+    if (value.length <= 5) {
+      // tag는 최대 5글자까지 허용
       setTag(value);
     }
   };
@@ -58,18 +58,43 @@ const DiaryEditor = ({ isEdit, originData }) => {
     setGroup(group);
   };
 
-  // 심각도 선택 처리 함수
-  const handleLevelChange = (event) => {
-    setLevel(event.target.value);
+  // 입력 검증 및 포커스 처리를 위한 함수
+  const validateInput = (ref, value, message) => {
+    if (value.length < 1) {
+      ref.current.focus();
+      alert(message);
+      return false;
+    }
+    return true;
+  };
+
+  const validateCategory = (value, message) => {
+    if (value == "") {
+      alert(message);
+      return false;
+    }
+    return true;
   };
 
   //const { onCreate, onEdit } = useContext(DiaryDispatchContext);
 
   const handleSubmit = async () => {
-    if (content.length < 1) {
-      contentRef.current.focus();
+    if (!validateInput(tagRef, tagRef.current.value, "태그를 작성해주세요!"))
       return;
-    }
+    if (
+      !validateInput(titleRef, titleRef.current.value, "제목을 작성해주세요!")
+    )
+      return;
+    if (
+      !validateInput(
+        contentRef,
+        contentRef.current.value,
+        "고민글을 작성해주세요!"
+      )
+    )
+      return;
+
+    if (!validateCategory(group, "게시판을 선택해주세요!")) return;
 
     const postData = {
       tag,
@@ -134,7 +159,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         <input
           className="tag-input"
           type="text"
-          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-8글자까지 입력)"
+          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-5글자까지 입력)"
           value={tag}
           ref={tagRef}
           onChange={handleTagChange}
@@ -165,27 +190,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
             </button>
           ))}
         </div>
-        <div className="severity-container">
-          <span className="editForm-severity">심각도(1~3)</span>
-          <p className="severity-description">
-            자신의 고민에 대한 심각도를 표시해주세요 *본인만 확인 가능
-          </p>{" "}
-        </div>
-        <span className="editorForm-level">{level}</span>
-        <div className="severitySelector">
-          <span className="range-value range-min">1</span>
-          <input
-            type="range"
-            id="level"
-            name="level"
-            min="1"
-            max="3"
-            value={level}
-            onChange={handleLevelChange}
-            className="severity-range"
-          />
-          <span className="range-value range-min">3</span>
-        </div>
+
         <span className="editForm-text">본문내용</span>
         <div className="input_box text_wrapper">
           <textarea

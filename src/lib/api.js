@@ -248,7 +248,7 @@ export const createDiary = async (postData) => {
 };
 
 export const updateDiary = async (id, postData) => {
-  await client.put(`/posts/post/${id}`, postData);
+  await client.put(`/posts/post/${id}/`, postData);
 };
 
 //jwtUtils
@@ -331,4 +331,25 @@ export const forumPlayInfo = async (content, speed, pitch, type) => {
   }
 };
 
+//마이페이지에서 게시글마다의 댓글을 음성으로 변환 및 저장하는 api
+export const postMyTracklist = async (postId) => {
+  try {
+    const response = await client.post(`/posts/Mp3File/${postId}/`);
+    return response.data; // 성공적으로 댓글을 추가한 후의 데이터 반환
+  } catch (error) {
+    console.error("댓글 음성 변환에 실패했습니다.", error);
+    throw error;
+  }
+};
 
+//마이페에지에서 보이스 댓글 url 쭉 받아오는 api
+export const getMyTracklist = async (postId) => {
+  try {
+    const response = await axios.get(`/posts/Mp3File/${postId}/`);
+
+    return response.data;
+  } catch (error) {
+    console.error("댓글 음성을 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+};

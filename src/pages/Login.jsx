@@ -58,7 +58,8 @@ const GradientButton = styled(Button)({
   },
   "&:active, &:focus": {
     outline: "none" // Remove outline on click/focus
-  }
+  },
+  fontFamily: "gamtan-font-r",
 });
 
 const StyledTextField = styled(TextField)(inputStyles);
@@ -93,6 +94,8 @@ const Login = () => {
 
       dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
       dispatch(setRefreshToken(response.token.refresh));
+      const message = response.message;
+      alert(message);
 
       navigate("/main");
     } catch (error) {
@@ -134,7 +137,7 @@ const Login = () => {
             )
           }}
         />
-      
+
         <GradientButton variant="outlined" onClick={handleLogin}>
           로그인
         </GradientButton>
