@@ -48,7 +48,7 @@ nav {
   text-decoration: none;
   color: white; /* 링크 텍스트 색상 */
   font-size: 18px; /* 텍스트 크기 조절 */
-  font-family: "gamtan-font-r"; /* 폰트 설정 */
+  font-family: "hanbit-font"; /* 폰트 설정 */
 }
 
 .LoginButton {
