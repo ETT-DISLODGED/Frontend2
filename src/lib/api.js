@@ -345,11 +345,33 @@ export const postMyTracklist = async (postId) => {
 //마이페에지에서 보이스 댓글 url 쭉 받아오는 api
 export const getMyTracklist = async (postId) => {
   try {
-    const response = await axios.get(`/posts/Mp3File/${postId}/`);
+    const response = await client.get(`/posts/Mp3File/${postId}/`);
 
     return response.data;
   } catch (error) {
     console.error("댓글 음성을 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+};
+
+//댓글 좋아요
+export const goodVoice = async (commentId) => {
+  try {
+    const response = await client.post(`/posts/comment/${commentId}/likes/`);
+    return response.data;
+  } catch (error) {
+    console.error("댓글 좋아요에 실패했습니다.", error);
+    throw error;
+  }
+};
+
+//댓글 좋아요 취소
+export const deleteGood = async (commentId) => {
+  try {
+    const response = await client.delete(`/posts/comment/${commentId}/likes/`);
+    return response.data;
+  } catch (error) {
+    console.error("댓글 좋아요 취소에 실패했습니다.", error);
     throw error;
   }
 };
