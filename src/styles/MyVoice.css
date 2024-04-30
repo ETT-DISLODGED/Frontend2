@@ -224,6 +224,46 @@ input[type="radio"] {
   color: white;
 }
 
+/*보이스 추천*/
+.voiceRecommend {
+  border: 1px solid #ff17e5;
+  width: 460px;
+  height: 40px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: row;
+  /*중앙정렬*/
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recommendTitle {
+  font-size: 13px;
+  text-align: center;
+  border-right: 1px solid white;
+  width: 25%;
+  padding-top: 2px;
+}
+.recommendContent {
+  padding-left: 8px;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: row;
+  text-align: center;
+}
+.recommend {
+  font-size: 13px;
+  text-align: center;
+  padding-right: 8px;
+}
+.noRecommend {
+  font-size: 13px;
+  text-align: center;
+}
+
 /* 화면 폭이 768px 미만일 때 */
 @media (max-width: 768px) {
   .myVoice {
