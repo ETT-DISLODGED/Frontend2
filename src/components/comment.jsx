@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../styles/comment.css";
 import { jwtUtils } from "../util/jwtUtils";
 import { useSelector } from "react-redux";
-import { getTargetPost, forumPlayInfo } from "../lib/api";
+import {
+  getTargetPost,
+  forumPlayInfo,
+  goodVoice,
+  deleteGood
+} from "../lib/api";
 
 const Comment = ({ comments, deleteComment, post_id }) => {
   const token = useSelector((state) => state.Auth.token);
@@ -16,7 +21,31 @@ const Comment = ({ comments, deleteComment, post_id }) => {
     await forumPlayInfo(content, speed, pitch, type);
   };
 
+  const [likeState, setLikeState] = useState({});
+
+  useEffect(() => {
+    // comments 배열로부터 초기 좋아요 상태 설정
+    const initialLikeState = {};
+    comments.forEach((comment) => {
+      initialLikeState[comment.id] = comment.is_liked;
+    });
+    setLikeState(initialLikeState);
+  }, [comments]);
+
+  //댓글 좋아요 누를시 좋아요 state 바뀌고, postGood/deleteGood 실행시켜 서버에 전달해야함
+  const toggleLike = async (commentId) => {
+    const liked = !likeState[commentId];
+    setLikeState((prevState) => ({
+      ...prevState,
+      [commentId]: liked
+    }));
+    if (liked) {
+      goodVoice(commentId);
+    } else deleteGood(commentId);
+  };
+
   const [post, setPost] = useState("");
+
   const targetPost = async () => {
     try {
       const response = await getTargetPost(post_id);
@@ -50,6 +79,11 @@ const Comment = ({ comments, deleteComment, post_id }) => {
           minute: "2-digit"
           //second: "2-digit"
         });
+
+        const heartImage = likeState[comment.id]
+          ? "/assets/redHeart.png"
+          : "/assets/whiteHeart.png";
+
         return (
           <div key={comment.id} className="comment">
             <div className="com_header">
@@ -67,6 +101,13 @@ const Comment = ({ comments, deleteComment, post_id }) => {
                 }
                 alt="commentPlay"
                 className="commentPlay"
+              ></img>
+
+              <p className="voiceGood">이 목소리 좋아요</p>
+              <img
+                src={heartImage}
+                onClick={() => toggleLike(comment.id)}
+                className="heart"
               ></img>
             </div>
             <p className="comment_text">{comment.content}</p>

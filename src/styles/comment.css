@@ -48,6 +48,16 @@
   padding-left: 5px;
 }
 
+.voiceGood {
+  font-size: 12px;
+  padding-left: 20px;
+  opacity: 60%;
+}
+
+.heart {
+  width: 29px;
+}
+
 .comment_but {
   text-align: right;
   padding-bottom: 15px;

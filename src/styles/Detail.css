@@ -60,7 +60,7 @@
   width: 60%; /* 또는 원하는 너비 */
   margin-left: auto;
   margin-right: auto;
-  white-space: normal; /* 공백과 줄바꿈을 정상적으로 처리 */
+  white-space: pre-wrap; /* 공백과 줄바꿈을 정상적으로 처리 */
   word-wrap: break-word; /* 경계를 넘어가는 텍스트에서 자동 줄바꿈 */
   text-align: left; /* 텍스트 왼쪽 정렬 */
   padding: 10px 0; /* 위 아래 패딩 (선택적) */
