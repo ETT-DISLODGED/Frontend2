@@ -375,3 +375,18 @@ export const deleteGood = async (commentId) => {
     throw error;
   }
 };
+
+//좋아요 통계 불러오기
+export const voiceStatistic = async () => {
+  try {
+    const response = await client.get(`/accounts/likelist/`);
+    return {
+      recommend_speed: response.data.speed_avg,
+      recommend_pitch: response.data.pitch_avg,
+      recommend_type: response.data.type_avg
+    };
+  } catch (error) {
+    console.error("댓글 좋아요 취소에 실패했습니다.", error);
+    throw error;
+  }
+};

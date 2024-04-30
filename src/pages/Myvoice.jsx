@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MyVoice.css";
-import { UpdateVoice, voiceInfo, playVoice } from "../lib/api";
+import { UpdateVoice, voiceInfo, playVoice, voiceStatistic } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
 const Myvoice = () => {
@@ -11,6 +11,10 @@ const Myvoice = () => {
   const [pitch, setPitch] = useState(0); //피치
   const [ssmlGender, setSsmlGender] = useState("female");
   const text = "가상보이스 생성이 완료되었습니다.";
+
+  const [recommendType, setRecommendType] = useState();
+  const [recommendSpeed, setRecommendSpeed] = useState(); //말 빠르기
+  const [recommendPitch, setRecommendPitch] = useState(); //피치
 
   // 빠르기 선택 처리 함수
   const handleSpeedChange = (event) => {
@@ -43,6 +47,18 @@ const Myvoice = () => {
     } catch (error) {
       ("목소리 업데이트 실패");
     }
+  };
+  //보이스 추천 정보 받아오기
+  const recommendResult = async () => {
+    const { recommend_type, recommend_speed, recommend_pitch } =
+      await voiceStatistic();
+    if (recommend_type == "ko-KR-Standard-A") setRecommendType("여성a");
+    else if (recommend_type == "ko-KR-Standard-B") setRecommendType("여성b");
+    else if (recommend_type == "ko-KR-Standard-C") setRecommendType("남성a");
+    else if (recommend_type == "ko-KR-Standard-D") setRecommendType("남성b");
+
+    setRecommendSpeed(recommend_speed);
+    setRecommendPitch(recommend_pitch);
   };
 
   /*
@@ -77,12 +93,29 @@ const Myvoice = () => {
       }
     };
     getVoice();
+    recommendResult();
   }, []);
 
   return (
     <div className="myVoice">
       <div className="voice-intro">
         <h2>가상보이스 생성하기</h2>
+      </div>
+      <div className="voiceRecommend">
+        <div className="recommendTitle">가상 보이스 추천</div>
+        <div className="recommendContent">
+          {recommendType ? (
+            <>
+              <div className="recommend">
+                기본 보이스 추천 : {recommendType},
+              </div>
+              <div className="recommend">스피드 추천 : {recommendSpeed}, </div>
+              <div className="recommend">피치 추천 : {recommendPitch} </div>
+            </>
+          ) : (
+            <div className="noRecommend">보이스 좋아요를 등록해주세요</div>
+          )}
+        </div>
       </div>
       <div className="voice">
         <div className="voice_letter">기본보이스</div>
