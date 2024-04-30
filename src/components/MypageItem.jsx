@@ -1,68 +1,111 @@
+import { useState } from "react";
+import { postMyTracklist, getMyTracklist } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
-import { getMyTracklist, postMyTracklist } from "../lib/api";
-import "../styles/Mypage.css";
-import { useState } from "react";
-
-const MypageItem = ({id, created_at, tag, picture }) => {
+const MypageItem = ({ id, tag, picture }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [tracklist, setTracklist] = useState([]);
+  const [buttonText, setButtonText] = useState("음원 불러오기"); // 버튼 텍스트 상태 추가
+  const navigate = useNavigate();
+
+  const initiatePlayList = async () => {
+    setIsLoading(true);
+    try {
+      await postMyTracklist(id);
+      setIsClicked(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const playTrackList = async () => {
-    
+    try {
+      const data = await getMyTracklist(id);
+      setTracklist(data.RESULT);
+      if (data.RESULT.length > 0) {
+        playAudio(0);
+        setButtonText("음원 재생하기"); // 데이터가 성공적으로 로드된 후 버튼 텍스트 변경
+      }
+    } catch (err) {
+      setError(err.message);
+    }
   };
-  
 
+  const playAudio = (trackIndex) => {
+    const audio = new Audio(tracklist[trackIndex]);
+    audio.play();
+    audio.onended = () => {
+      if (trackIndex < tracklist.length - 1) {
+        playAudio(trackIndex + 1);
+      }
+    };
+  };
 
-  // // 프론트에서 mp3가 담긴 URL이 잘 틀어지는지 테스트 -임시 민경
-  // const [audio] = useState(new Audio('https://dislodged.s3.ap-northeast-2.amazonaws.com/a123.mp3'));
-  // // const navigate = useNavigate();
-
-  // const playAudio = () => {
-  //   audio.play();
-  // };
-
-  const strDate = new Date(created_at).toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  });
+  const goToArticle = () => {
+    navigate(`/detail/${id}`);
+  };
 
   return (
     <div className="albumCover">
       <div className="tag">TR #{tag}</div>
       <div className="circle">
-        {/* 이미지와 버튼을 함께 래핑하는 컨테이너 */}
         <div
           style={{ position: "relative" }}
-          onClick={() => setIsClicked(!isClicked)} // 이미지 클릭시 상태 변경
+          onClick={() => {
+            if (!isClicked) initiatePlayList();
+          }}
         >
           <img src={picture} alt="album cover" className="albumImage" />
-          {/* 이미지 클릭시 버튼이 보이도록 조건부 렌더링 */}
           {isClicked && (
             <>
               <button
                 className="playButton"
-                onClick={() => {
-                  playTrackList();
-                }}
                 style={{
+                  height: '30px',
+                  fontSize: '10.5px',
                   position: "absolute",
-                  top: "50%",
+                  top: "25%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   zIndex: 1
                 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playTrackList();
+                }}
               >
-                재생
+                {buttonText} {/* 동적으로 변경되는 버튼 텍스트 */}
+              </button>
+              <button
+                className="articleButton"
+                style={{
+                  height: '30px',
+                  fontSize: '10.5px',
+                  position: "absolute",
+                  top: "42%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  zIndex: 1
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToArticle();
+                }}
+              >
+                글 보러가기
               </button>
             </>
           )}
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error: {error}</p>}
         </div>
       </div>
-
     </div>
   );
 };
-
 
 export default MypageItem;
