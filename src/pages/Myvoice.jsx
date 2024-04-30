@@ -57,8 +57,8 @@ const Myvoice = () => {
     else if (recommend_type == "ko-KR-Standard-C") setRecommendType("남성a");
     else if (recommend_type == "ko-KR-Standard-D") setRecommendType("남성b");
 
-    setRecommendSpeed(recommend_speed);
-    setRecommendPitch(recommend_pitch);
+    setRecommendSpeed(recommend_speed.toFixed(1));
+    setRecommendPitch(recommend_pitch.toFixed(0));
   };
 
   /*
