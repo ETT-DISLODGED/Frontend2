@@ -15,7 +15,7 @@ nav {
   position: fixed;
   left: 15%;
   margin-top: 40px;
-  margin-left: 40px;
+  margin-left: 30px;
   margin-bottom: 20px;
 }
 
@@ -29,7 +29,7 @@ nav {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 100px;
+  gap: 80px;
   position: fixed;
   right: 15%;
   padding-top: 40px;
@@ -40,14 +40,14 @@ nav {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 100px; /* 각 nav 항목 간의 간격 (적절한 값으로 조절) */
+  gap: 80px; /* 각 nav 항목 간의 간격 (적절한 값으로 조절) */
   border-bottom: 10px solid transparent;
 }
 
 .nav-border a {
   text-decoration: none;
   color: white; /* 링크 텍스트 색상 */
-  font-size: 18px; /* 텍스트 크기 조절 */
+  font-size: 17px; /* 텍스트 크기 조절 */
   font-family: "hanbit-font"; /* 폰트 설정 */
 }
 
@@ -61,4 +61,99 @@ nav {
   margin-left: auto; /* 남은 공간을 모두 오른쪽에 배치 */
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
+}
+
+@media screen and (max-width: 786px) {
+  
+  /* 로고 왼쪽 정렬 */
+  .logo-item {
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+  }
+  
+  /* 로고 이미지 크기 */
+  .logo {
+    width: 50px;
+  }
+  
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    position: fixed;
+    right: 10%;
+    padding-top: 20px;
+    padding-right: 20px;
+  }
+  
+  .nav-border {
+    gap: 30px; /* 각 nav 항목 간의 간격 (적절한 값으로 조절) */
+    border-bottom: 5px solid transparent;
+  }
+  
+  .nav-border a {
+    font-size: 12px; /* 텍스트 크기 조절 */
+    font-family: "hanbit-font"; /* 폰트 설정 */
+  }
+  
+  .LoginButton {
+    margin-bottom: 18px;
+  }
+
+  .LoginButton button {
+    font-size: 12px; /* 로그인 버튼 크기 */
+  }
+  .ProfileButton {
+    font-size: 25px; /* PersonIcon 크기 */
+  }
+}
+@media screen and (max-width: 480px) {
+ 
+  
+  /* 로고 왼쪽 정렬 */
+  .logo-item {
+    margin-top: 25px;
+    margin-bottom: 7px;
+    margin-left: -5px;
+  }
+  
+  /* 로고 이미지 크기 */
+  .logo {
+    width: 35px;
+  }
+  
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    position: fixed;
+    right: 5%;
+    padding-top: 13px;
+    padding-right: 13px;
+  }
+  
+  .nav-border {
+    gap: 23px; /* 각 nav 항목 간의 간격 (적절한 값으로 조절) */
+    border-bottom: 3px solid transparent;
+  }
+  
+  .nav-border a {
+    font-size: 9px; /* 텍스트 크기 조절 */
+    font-family: "hanbit-font"; /* 폰트 설정 */
+  }
+  
+  .LoginButton {
+    margin-top: 5px;
+  }
+  .LoginButton button {
+    font-size: 8px; /* 로그인 버튼 크기 */
+  }
+  .ProfileButton {
+    font-size: 18px; /* PersonIcon 크기 */
+  }
+  
+ 
 }

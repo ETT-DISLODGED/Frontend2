@@ -159,6 +159,19 @@ export const login = async (userData) => {
   }
 };
 
+//마이페이지에 유저정보 가져오기
+export const getUser = async () => {
+  try {
+
+    const response = await client.get("/accounts/login/");
+    return response.data;
+  } catch (error) {
+    // 요청이 실패했을 때
+    console.error("로그인 요청 실패:", error);
+    throw error;
+  }
+};
+
 export const getForumPosts = async (activeGroup, page) => {
   try {
     const response = await client.get(
