@@ -17,6 +17,9 @@ const MypageItem = ({ id, tag, picture }) => {
       setIsClicked(true);
     } catch (err) {
       setError(err.message);
+      alert(err.response.data.RESULT);
+      goToArticle();
+      
     } finally {
       setIsLoading(false);
     }
@@ -68,10 +71,12 @@ const MypageItem = ({ id, tag, picture }) => {
                   height: '30px',
                   fontSize: '10.5px',
                   position: "absolute",
-                  top: "25%",
+                  top: "48%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  zIndex: 1
+                  zIndex: 1,
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                  color: "white" 
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -86,10 +91,12 @@ const MypageItem = ({ id, tag, picture }) => {
                   height: '30px',
                   fontSize: '10.5px',
                   position: "absolute",
-                  top: "42%",
+                  top: "70%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  zIndex: 1
+                  zIndex: 1,
+                  backgroundColor: "rgba(0, 0, 0, 0.8)", 
+                  color: "white" 
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
