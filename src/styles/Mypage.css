@@ -66,6 +66,7 @@
 /*MypageItem */
 .albumCover {
   text-align: center;
+  
 }
 .circle {
   display: inline-block;
@@ -73,18 +74,14 @@
   height: 170px;
   border-radius: 50%; /* 원 모양 */
   overflow: hidden; /* 내부 이미지가 원을 벗어나지 않도록 */
+  box-shadow: 0 0 30px 1.5px rgb(102, 100, 100); /* 흐림과 퍼짐을 증가 */
 }
-.dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  color: pink;
-}
+
 .albumImage {
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
+
 }
 
 

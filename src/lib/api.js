@@ -159,6 +159,19 @@ export const login = async (userData) => {
   }
 };
 
+//마이페이지에 유저정보 가져오기
+export const getUser = async () => {
+  try {
+
+    const response = await client.get("/accounts/login/");
+    return response.data;
+  } catch (error) {
+    // 요청이 실패했을 때
+    console.error("로그인 요청 실패:", error);
+    throw error;
+  }
+};
+
 export const getForumPosts = async (activeGroup, page) => {
   try {
     const response = await client.get(
@@ -345,11 +358,48 @@ export const postMyTracklist = async (postId) => {
 //마이페에지에서 보이스 댓글 url 쭉 받아오는 api
 export const getMyTracklist = async (postId) => {
   try {
-    const response = await axios.get(`/posts/Mp3File/${postId}/`);
+    const response = await client.get(`/posts/Mp3File/${postId}/`);
 
     return response.data;
   } catch (error) {
     console.error("댓글 음성을 불러오는 데 실패했습니다.", error);
+    throw error;
+  }
+};
+
+//댓글 좋아요
+export const goodVoice = async (commentId) => {
+  try {
+    const response = await client.post(`/posts/comment/${commentId}/likes/`);
+    return response.data;
+  } catch (error) {
+    console.error("댓글 좋아요에 실패했습니다.", error);
+    throw error;
+  }
+};
+
+//댓글 좋아요 취소
+export const deleteGood = async (commentId) => {
+  try {
+    const response = await client.delete(`/posts/comment/${commentId}/likes/`);
+    return response.data;
+  } catch (error) {
+    console.error("댓글 좋아요 취소에 실패했습니다.", error);
+    throw error;
+  }
+};
+
+//좋아요 통계 불러오기
+export const voiceStatistic = async () => {
+  try {
+    const response = await client.get(`/accounts/likelist/`);
+    return {
+      recommend_speed: response.data.speed_avg,
+      recommend_pitch: response.data.pitch_avg,
+      recommend_type: response.data.type_avg
+    };
+  } catch (error) {
+    console.error("댓글 좋아요 취소에 실패했습니다.", error);
     throw error;
   }
 };

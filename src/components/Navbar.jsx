@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
-import { useSelector } from "react-redux"; // useSelector를 가져옵니다.
+import { useSelector } from "react-redux";
+import { jwtUtils } from "../util/jwtUtils";
+import store from "../redux/configStore";
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => !!state.Auth.token); 
-
+  const token = store.getState().Auth.token;
+  const isLoggedIn = jwtUtils.isAuth(token);
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
@@ -39,7 +41,7 @@ const Navbar = () => {
         <div className="button-container">
           {isLoggedIn ? (
             <div className="ProfileButton" onClick={navigateToMyPage}>
-              <PersonIcon sx={{ fontSize: 34, color: "white" }} />
+              <PersonIcon sx={{ fontSize: 34, color: "white" }} /> {/* 여기서 크기 설정 */}
             </div>
           ) : (
             <div className="LoginButton">
