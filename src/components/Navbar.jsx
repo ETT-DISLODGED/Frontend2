@@ -4,9 +4,13 @@ import "../styles/Navbar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux"; // useSelector를 가져옵니다.
+import { jwtUtils } from "../util/jwtUtils";
+import store from "../redux/configStore";
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => !!state.Auth.token); 
+  //const isLoggedIn = useSelector((state) => !!state.Auth.token);
+  const token = store.getState().Auth.token;
+  const isLoggedIn = jwtUtils.isAuth(token);
 
   const navigate = useNavigate();
 
