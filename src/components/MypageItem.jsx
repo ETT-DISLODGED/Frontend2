@@ -2,12 +2,12 @@ import { useState } from "react";
 import { postMyTracklist, getMyTracklist } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
-const MypageItem = ({ id, tag, picture }) => {
+const MypageItem = ({ id, tag, picture, comments }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tracklist, setTracklist] = useState([]);
-  const [buttonText, setButtonText] = useState("음원 불러오기"); // 버튼 텍스트 상태 추가
+  const [buttonText, setButtonText] = useState("음원 불러오기");
   const navigate = useNavigate();
 
   const initiatePlayList = async () => {
@@ -17,9 +17,6 @@ const MypageItem = ({ id, tag, picture }) => {
       setIsClicked(true);
     } catch (err) {
       setError(err.message);
-      alert(err.response.data.RESULT);
-      goToArticle();
-      
     } finally {
       setIsLoading(false);
     }
@@ -31,7 +28,7 @@ const MypageItem = ({ id, tag, picture }) => {
       setTracklist(data.RESULT);
       if (data.RESULT.length > 0) {
         playAudio(0);
-        setButtonText("음원 재생하기"); // 데이터가 성공적으로 로드된 후 버튼 텍스트 변경
+        setButtonText("음원 재생하기");
       }
     } catch (err) {
       setError(err.message);
@@ -59,7 +56,14 @@ const MypageItem = ({ id, tag, picture }) => {
         <div
           style={{ position: "relative" }}
           onClick={() => {
-            if (!isClicked) initiatePlayList();
+            if (comments && comments.length > 0) { // 댓글이 있는 경우
+              setIsClicked(!isClicked);
+              if (!isClicked) initiatePlayList();
+            }
+            else{
+              alert("해당 게시글에 달린 댓글이 없습니다! 게시글로 이동합니다.");
+              goToArticle();
+            }
           }}
         >
           <img src={picture} alt="album cover" className="albumImage" />
@@ -76,14 +80,14 @@ const MypageItem = ({ id, tag, picture }) => {
                   transform: "translate(-50%, -50%)",
                   zIndex: 1,
                   backgroundColor: "rgba(0, 0, 0, 0.8)", 
-                  color: "white" 
+                  color: "white"
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   playTrackList();
                 }}
               >
-                {buttonText} {/* 동적으로 변경되는 버튼 텍스트 */}
+                {buttonText}
               </button>
               <button
                 className="articleButton"
@@ -96,7 +100,7 @@ const MypageItem = ({ id, tag, picture }) => {
                   transform: "translate(-50%, -50%)",
                   zIndex: 1,
                   backgroundColor: "rgba(0, 0, 0, 0.8)", 
-                  color: "white" 
+                  color: "white"
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
