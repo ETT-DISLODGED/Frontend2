@@ -113,7 +113,9 @@ const Myvoice = () => {
               <div className="recommend">피치 추천 : {recommendPitch} </div>
             </>
           ) : (
-            <div className="noRecommend">보이스 좋아요를 등록해주세요</div>
+            <div className="noRecommend">
+              보이스가 마음에 드는 댓글에 좋아요를 남겨주세요!
+            </div>
           )}
         </div>
       </div>

@@ -38,8 +38,8 @@ const DiaryEditor = ({ isEdit, originData }) => {
   // tag 입력 처리
   const handleTagChange = (e) => {
     const { value } = e.target;
-    if (value.length <= 5) {
-      // tag는 최대 5글자까지 허용
+    if (value.length <= 7) {
+      // tag는 최대 7글자까지 허용
       setTag(value);
     }
   };
@@ -159,7 +159,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         <input
           className="tag-input"
           type="text"
-          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-5글자까지 입력)"
+          placeholder="마이페이지에 보여지는 해당 앨범 이름 (1-7글자까지 입력)"
           value={tag}
           ref={tagRef}
           onChange={handleTagChange}
