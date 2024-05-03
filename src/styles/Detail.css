@@ -121,6 +121,10 @@
   text-align: left;
 }
 
+/* 악성댓글 */
+.highlight {
+  text-decoration: underline red;
+}
 form {
   text-align: left;
 }

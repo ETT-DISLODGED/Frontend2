@@ -43,6 +43,9 @@ const Detail = () => {
 
   const [userId, setUserId] = useState("");
 
+  const [badWords, setBadWords] = useState([]);
+  const [highlightComment, setHighlightComment] = useState("");
+
   const maxLength = 300; //댓글 최대 300자
 
   const handleDeleteComment = async (id) => {
@@ -77,13 +80,28 @@ const Detail = () => {
 
   const handleAddComment = async (e) => {
     e.preventDefault(); //form은 submit하면 창이 reload되는데 reload 되는 걸 막아줌
-    //console.log(comment1);
+
+    let containBadWord = false;
+    let modifiedText = comment1;
+    badWords.forEach((word) => {
+      const regex = new RegExp(`(${word})`, "gi");
+      if (regex.test(comment1)) {
+        containBadWord = true;
+        modifiedText = modifiedText.replace(
+          regex,
+          '<span class="highlight">$1</span>'
+        );
+      }
+    });
+    if (containBadWord) {
+      setHighlightComment(modifiedText);
+      alert("비속어가 포함된 댓글은 작성할 수 없습니다.");
+      return; // 함수 실행 중단*/
+    }
+
     const newComment = {
-      //id: Date.now(), //데이터베이스에 추가하면 아이디가 생성되므로 걔를 사용하면 됨
       content: comment1,
       post: id //useParmas에서 가져온 id 이용
-      //created_at: new Date().toISOString(),
-      //author: userNickname //로그인이랑 연결한 후 바꾸기
     };
 
     try {
@@ -133,6 +151,22 @@ const Detail = () => {
     setFilteredComments(filteredComments);
     setCommentCount(filteredComments.length);
   }, [id, commentList]);
+
+  //욕설 리스트 불러와 badList에 저장
+  useEffect(() => {
+    fetch("/badWords.txt")
+      .then((response) => response.text())
+      .then((text) => {
+        const words = text
+          .split("\n")
+          .map((word) => word.trim())
+          .filter((word) => word);
+        setBadWords(words);
+      })
+      .catch((error) =>
+        console.error("bad word 불러오는 중 오류 발생:", error)
+      );
+  }, []);
 
   if (!data) {
     return <div className="DetailPage">데이터가 없습니다...</div>;
@@ -198,12 +232,18 @@ const Detail = () => {
               placeholder="작성한 댓글은 삭제할 수 없으니 신중하게 달아주세요!(1-300자까지 입력가능)"
               onChange={handleInputChange}
             />
+
             <button type="submit">입력</button>
           </form>
           <p>
             {comment1.length}/{maxLength}
           </p>
         </div>
+        {/*밑줄쳐진 텍스트
+        <div
+          className="output"
+          dangerouslySetInnerHTML={{ __html: highlightComment }}
+        />*/}
         {/*value로 comment1을 줌으로써 댓글 입력창란이 comment1의 상태대로 뜬다, 최대 300글자 입력*/}
       </div>
     );
