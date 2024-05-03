@@ -12,7 +12,7 @@ const MypageList = ({ mypageList }) => {
             created_at={post.created_at}
             tag={post.tag}
             picture={post.image_url}
-            
+            comments ={post.comment}
           />
         ))
       ) : (
