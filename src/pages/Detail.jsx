@@ -94,7 +94,6 @@ const Detail = () => {
       setCommentCount((commentCount) => commentCount + 1); //보이는 댓글 수 +1
     } catch (error) {
       console.log("댓글 추가 실패", error);
-      alert("댓글 추가하는 동안 문제 발생");
     }
   };
 
