@@ -2,6 +2,7 @@ import { useState } from "react";
 import { postMyTracklist, getMyTracklist } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
+
 const MypageItem = ({ id, tag, picture, comments }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

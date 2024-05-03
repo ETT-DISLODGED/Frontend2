@@ -45,8 +45,7 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 30px;
-  padding-bottom: 50px;
-
+  padding-bottom: 10px;
   width: 85%;
 }
 
@@ -84,6 +83,12 @@
 
 }
 
+.bgm {
+  display: flex;
+  justify-content: flex-end;
+  width: 85%;
+  padding-top: 5px;
+}
 
 .tag {
   color: white; 
