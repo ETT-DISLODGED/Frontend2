@@ -1,0 +1,52 @@
+name: Front Deployment
+
+# trigger가 되길 바라는 action을 입력합니다. push / pull_request가 있습니다.
+# 저는 main브랜치에 push가 되면 actions을 실행하도록 설정했습니다.
+on:
+  push:
+    branches:
+      - feature/Voice
+
+# 위의 이벤트가 트리거되면 실행할 목록입니다.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # name은 단계별로 실행되는 액션들의 설명을 담은 것으로, 나중에 github action에서 workflow에 표시됩니다.
+    # uses 키워드로 Action을 불러올 수 있습니다.
+    steps:
+      # 레포지토리에 접근하여 CI서버로 코드를 내려받는 과정입니다.
+      - name: checkout Github Action
+        uses: actions/checkout@v3
+
+      # aws에 접근하기 위한 권한을 받아옵니다.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{secrets.AWS_REGION}}
+
+      - name: react build
+        run: |
+          yarn install
+          yarn build
+
+      # S3에 build 파일을 올립니다.
+      - name: Upload to S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read
+
+      # CloudFront의 경우 기본적으로 콘텐츠를 캐시에 저장해두고, 배포된 URL에 접근시 빠른 반응속도를 위하여 캐시에 저장된 콘텐츠를 반환해주게 된다.
+      # 하지만 이러한 특성때문에 S3에 업로드한 파일이 사용자에게 바로 반영이 되지않는 단점이 있다.
+      # 이를 해결하기 위해서 캐시 무력화 설정을 해주면 된다.
+      - name: CloudFront cache ignore
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION_ID }}
+          PATHS: "/*"
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
