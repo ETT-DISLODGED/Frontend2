@@ -113,7 +113,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         if (!isEdit) {
           //onCreate(tag, title, group, level, content);
           await createDiary(postData);
-          alert("작성 완료");
+          //alert("작성 완료");
         } else {
           await updateDiary(originData.id, postData);
 
