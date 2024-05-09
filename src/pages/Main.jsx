@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import "../styles/Main.css";
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
-import mouseImage from "/assets/mouse.png"; // 이미지 경로를 import 합니다.
+import mouseImage from "/assets/mouse.png"; 
+import Dialog from '@mui/material/Dialog'; //모달용
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import { useState } from "react";
+
 
 const Container = styled("div")({
   display: "flex",
@@ -32,15 +38,52 @@ const MouseImage = styled("img")({
 });
 
 const Main = () => {
+  const [open, setOpen] = useState(false);
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="section section1">
       <div className="main-container">
         <Container>
-          
-          <GradientButton variant="outlined">
+          <GradientButton variant="outlined" onClick={handleClickOpen}>
             서비스 사용법 보러가기
           </GradientButton>
-          <MouseImage src={mouseImage} alt="mouse" /> {/* 이미지를 추가합니다. */}
+          <MouseImage src={mouseImage} alt="mouse" />
+          <Dialog open={open} onClose={handleClose}>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+            <DialogContent>
+              여기에 서비스 사용법을 적어주세요.<br></br>
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+              여기에 서비스 사용법을 적어주세요.
+
+            </DialogContent>
+          </Dialog>
         </Container>
       </div>
     </div>
