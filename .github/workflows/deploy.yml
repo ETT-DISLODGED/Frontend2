@@ -37,7 +37,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read
+        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET_NAME }} --acl public-read
 
       # CloudFront의 경우 기본적으로 콘텐츠를 캐시에 저장해두고, 배포된 URL에 접근시 빠른 반응속도를 위하여 캐시에 저장된 콘텐츠를 반환해주게 된다.
       # 하지만 이러한 특성때문에 S3에 업로드한 파일이 사용자에게 바로 반영이 되지않는 단점이 있다.
