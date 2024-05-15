@@ -103,7 +103,7 @@ const Comment = ({ comments, deleteComment, post_id }) => {
                 className="commentPlay"
               ></img>
 
-              <p className="voiceGood">이 목소리 좋아요</p>
+              <p className="voiceGood">이 보이스 좋아요</p>
               <img
                 src={heartImage}
                 onClick={() => toggleLike(comment.id)}
