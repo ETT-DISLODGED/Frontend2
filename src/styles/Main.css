@@ -1,6 +1,6 @@
 
 .section {
-  width: 83%; /* 가로 크기를 80%로 설정합니다. */
+  width: 100%; /* 가로 크기를 80%로 설정합니다. */
   margin: 0 auto; /* 가로 중앙 정렬을 위해 좌우 마진을 자동으로 설정합니다. */
   height: 100vh;
   display: flex;
@@ -13,6 +13,7 @@
 
 .section1 {
   background-image: url('/assets/mainwave.gif');
+  width: 800px;
 }
 
 .main-container {
@@ -21,4 +22,15 @@
     left: 300px; /* 왼쪽으로 50px 이동 */
   
 }
+/* @media (max-width: 768px) {
+ .section1 {
+  
+ }
+}
+
+@media (max-width: 480px) {
+  .mypage-body {
+  
+  }
+} */
 
