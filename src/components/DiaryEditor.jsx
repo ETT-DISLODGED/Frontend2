@@ -117,12 +117,12 @@ const DiaryEditor = ({ isEdit, originData }) => {
         } else {
           await updateDiary(originData.id, postData);
 
-          alert("수정 완료");
+          //alert("수정 완료");
         }
         navigate("/", { replace: true });
       } catch (error) {
         console.error("게시글 작성/수정에 실패", error);
-        alert("게시글 작성/수정에 실패");
+        //alert("게시글 작성/수정에 실패");
       }
   };
 

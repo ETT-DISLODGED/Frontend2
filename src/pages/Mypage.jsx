@@ -3,10 +3,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "../styles/Mypage.css";
 import MypageList from "../components/MypageList";
-import bgm1 from "/assets/emotion.mp3"; // Import background music file
-import bgm2 from "/assets/jinglebell.mp3"; // Add more music files
-import bgm3 from "/assets/arabesque.mp3";
+import bgm1 from "/assets/perfect.mp3"; // Import background music file
+import bgm2 from "/assets/whispersof.mp3"; // Add more music files
+import bgm3 from "/assets/onceinparis.mp3";
 import bgm4 from "/assets/sadpiano.mp3";
+import bgm5 from "/assets/loveserena.mp3";
 import playIcon from "/assets/play2.png";
 import pauseIcon from "/assets/pause.png";
 import stopIcon from "/assets/stop.png";
@@ -29,7 +30,7 @@ const Mypage = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(0.5);
   const [bgm, setBgm] = useState(bgm1); // State for selected BGM
-  const bgms = [bgm1, bgm2, bgm3, bgm4]; // Array of available BGMS
+  const bgms = [bgm1, bgm2, bgm3, bgm4, bgm5]; // Array of available BGMS
 
   useEffect(() => {
     // Existing effects

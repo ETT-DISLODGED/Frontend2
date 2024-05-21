@@ -26,7 +26,7 @@ const Edit = () => {
         setOriginData(data);
       } catch (error) {
         console.log("저장된 게시글 내용 가져오는 중 오류 발생", error);
-        alert("존재하지 않는 게시글입니다");
+        //alert("존재하지 않는 게시글입니다");
         navigate(-1); //이전페이지로 이동
       }
     };

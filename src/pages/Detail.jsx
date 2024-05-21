@@ -12,6 +12,8 @@ import axios from "axios";
 import { jwtUtils } from "../util/jwtUtils";
 import { useSelector } from "react-redux";
 
+import Dialog from "@mui/material/Dialog"; //모달용
+
 import {
   deleteComment,
   deletePost,
