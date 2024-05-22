@@ -103,27 +103,27 @@ const DiaryEditor = ({ isEdit, originData }) => {
       level,
       content
     };
-
+    /*
     if (
       window.confirm(
         isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?"
       )
-    )
-      try {
-        if (!isEdit) {
-          //onCreate(tag, title, group, level, content);
-          await createDiary(postData);
-          //alert("작성 완료");
-        } else {
-          await updateDiary(originData.id, postData);
+    )*/
+    try {
+      if (!isEdit) {
+        //onCreate(tag, title, group, level, content);
+        await createDiary(postData);
+        //alert("작성 완료");
+      } else {
+        await updateDiary(originData.id, postData);
 
-          //alert("수정 완료");
-        }
-        navigate("/", { replace: true });
-      } catch (error) {
-        console.error("게시글 작성/수정에 실패", error);
-        //alert("게시글 작성/수정에 실패");
+        //alert("수정 완료");
       }
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("게시글 작성/수정에 실패", error);
+      //alert("게시글 작성/수정에 실패");
+    }
   };
 
   useEffect(() => {

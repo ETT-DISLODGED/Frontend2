@@ -15,7 +15,7 @@ import soundIcon from "/assets/sound.png";
 // import musicIcon from "/assets/music.png";
 
 import { getMyForumPosts } from "../lib/api";
-import { getUser } from "../lib/api";  
+import { getUser } from "../lib/api";
 import Pagination from "react-js-pagination";
 import { setToken } from "../redux/reducers/AuthReducer";
 
@@ -26,7 +26,7 @@ const Mypage = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(searchParams.get("page") || 1);
   const [postList, setPostList] = useState([]);
-  const [userName, setUserName] = useState('Loading...');
+  const [userName, setUserName] = useState("Loading...");
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(0.5);
   const [bgm, setBgm] = useState(bgm1); // State for selected BGM
@@ -39,14 +39,13 @@ const Mypage = () => {
   const handleBgmChange = (event) => {
     const newBgm = event.target.value;
     setBgm(newBgm); // 새로운 BGM으로 상태 업데이트
-    const audio = document.getElementById('bgm');
+    const audio = document.getElementById("bgm");
     audio.pause();
     audio.load(); // 이 함수는 새로운 소스를 로드합니다
     if (isPlaying) {
       audio.play(); // 새 트랙 재생
     }
   };
-  
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -55,7 +54,7 @@ const Mypage = () => {
         setUserName(userData.data.nickname);
       } catch (error) {
         console.error("Failed to fetch user data:", error);
-        setUserName('Failed to load user data');
+        setUserName("Failed to load user data");
       }
     };
 
@@ -86,11 +85,11 @@ const Mypage = () => {
 
   const logout = async () => {
     dispatch(setToken(""));
-    alert("로그아웃 완료");
+    //alert("로그아웃 완료");
     navigate("/");
   };
   const togglePlay = () => {
-    const audio = document.getElementById('bgm');
+    const audio = document.getElementById("bgm");
     if (isPlaying) {
       audio.pause(); // Pause the music
     } else {
@@ -98,16 +97,16 @@ const Mypage = () => {
     }
     setIsPlaying(!isPlaying); // Update the state
   };
-  
+
   const stopMusic = () => {
-    const audio = document.getElementById('bgm');
+    const audio = document.getElementById("bgm");
     audio.pause(); // Stop the music
     audio.currentTime = 0; // Reset the music
     setIsPlaying(false); // Update the state
   };
-  
+
   const adjustVolume = (e) => {
-    const audio = document.getElementById('bgm');
+    const audio = document.getElementById("bgm");
     setVolume(parseFloat(e.target.value)); // Adjust the volume
     audio.volume = parseFloat(e.target.value);
   };
@@ -116,7 +115,6 @@ const Mypage = () => {
     <div className="mypage">
       <div className="mypage-header">
         <h2>{userName} 님의 TRACK LIST</h2>
-        
       </div>
       <div className="logout">
         <button className="logout-button" onClick={logout}>
@@ -124,17 +122,49 @@ const Mypage = () => {
         </button>
       </div>
       <div className="bgm">
-        <div className="music-controls" style={{background:"#242222", borderRadius: "10px",padding: "10px", marginTop: "10px", width: "300px"}}>
-          <select onChange={handleBgmChange} value={bgm} style={{ marginRight: "10px" }}>
+        <div
+          className="music-controls"
+          style={{
+            background: "#242222",
+            borderRadius: "10px",
+            padding: "10px",
+            marginTop: "10px",
+            width: "300px"
+          }}
+        >
+          <select
+            onChange={handleBgmChange}
+            value={bgm}
+            style={{ marginRight: "10px" }}
+          >
             {bgms.map((song, index) => (
               <option key={index} value={song}>
                 BGM {index + 1}
               </option>
             ))}
           </select>
-          <img onClick={togglePlay} src={isPlaying ? pauseIcon : playIcon} alt={isPlaying ? "일시정지" : "재생"} style={{cursor: "pointer",marginLeft:"15px",marginRight:"15px", height:"13px"}} />
-          <img onClick={stopMusic} src={stopIcon} alt="정지" style={{height:"13px",cursor: "pointer",marginRight:"25px"}} />
-          <img src={soundIcon} alt="음량" style={{height: "13px", marginRight:"10px"}}/>
+          <img
+            onClick={togglePlay}
+            src={isPlaying ? pauseIcon : playIcon}
+            alt={isPlaying ? "일시정지" : "재생"}
+            style={{
+              cursor: "pointer",
+              marginLeft: "15px",
+              marginRight: "15px",
+              height: "13px"
+            }}
+          />
+          <img
+            onClick={stopMusic}
+            src={stopIcon}
+            alt="정지"
+            style={{ height: "13px", cursor: "pointer", marginRight: "25px" }}
+          />
+          <img
+            src={soundIcon}
+            alt="음량"
+            style={{ height: "13px", marginRight: "10px" }}
+          />
           <input
             type="range"
             min="0"
@@ -142,7 +172,7 @@ const Mypage = () => {
             step="0.01"
             value={volume}
             onChange={adjustVolume}
-            style={{height: "10px", width:"100px", marginTop:"4px"}}
+            style={{ height: "10px", width: "100px", marginTop: "4px" }}
           />
         </div>
       </div>
@@ -158,12 +188,11 @@ const Mypage = () => {
           onChange={handlePageChange}
         />
       </div>
-  
+
       <audio id="bgm" autoPlay loop volume={volume}>
         <source src={bgm} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-
     </div>
   );
 };

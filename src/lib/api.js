@@ -162,7 +162,6 @@ export const login = async (userData) => {
 //마이페이지에 유저정보 가져오기
 export const getUser = async () => {
   try {
-
     const response = await client.get("/accounts/login/");
     return response.data;
   } catch (error) {
@@ -335,9 +334,6 @@ export const playVoice = async (text, speed, pitch, type) => {
 
 export const forumPlayInfo = async (content, speed, pitch, type) => {
   try {
-    //유미한테 author_id을 통해 type, speed, pitch 받아오는 api호출하기(await로)
-    //await
-    //console.log(author, content);
     await playVoice(content, speed, pitch, type);
   } catch (error) {
     console.error("게시글 음성 재생 중 오류 발생:", error);
