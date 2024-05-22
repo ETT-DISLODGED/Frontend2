@@ -9,19 +9,41 @@ import {
   deleteGood
 } from "../lib/api";
 
+import Dialog from "@mui/material/Dialog"; //모달용
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Button from "@mui/material/Button";
+
 const Comment = ({ comments, deleteComment, post_id }) => {
   const token = useSelector((state) => state.Auth.token);
   //const [userNickname, setUserNickname] = useState("");
   const [userId, setUserId] = useState("");
 
   const handleCommentPlay = async (content, speed, pitch, type) => {
-    //comment.authorid 가져오고 얘 이용해서 저장된 pitch, speed, type가져오기
-    //comment.content 가져오고
-    //이 두개 이용해서 음성 재생하게끔
     await forumPlayInfo(content, speed, pitch, type);
   };
 
   const [likeState, setLikeState] = useState({});
+
+  const [open, setOpen] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+
+  const handleOpen = (commentId) => {
+    setOpen(true);
+    setSelectedCommentId(commentId);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    // 모달을 닫을 때 페이지 이동
+  };
+
+  const handleDelete = () => {
+    if (selectedCommentId) {
+      deleteComment(selectedCommentId);
+      handleClose();
+    }
+  };
 
   useEffect(() => {
     // comments 배열로부터 초기 좋아요 상태 설정
@@ -115,12 +137,30 @@ const Comment = ({ comments, deleteComment, post_id }) => {
               <div className="comment_but">
                 <button
                   className="comment_del"
-                  onClick={() => deleteComment(comment.id)}
+                  onClick={() => handleOpen(comment.id)}
                 >
                   삭제하기
                 </button>
               </div>
             )}
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  정말로 댓글을 삭제하시겠습니까?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>취소</Button>
+                <Button onClick={handleDelete} autoFocus>
+                  삭제
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
         );
       })}

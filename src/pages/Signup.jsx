@@ -11,7 +11,12 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import "../styles/Login.css";
-import { signUp } from '../lib/api';
+import { signUp } from "../lib/api";
+import Dialog from "@mui/material/Dialog"; //모달용
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+//import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 const CenteredContainer = styled("div")({
   display: "flex",
@@ -21,30 +26,30 @@ const CenteredContainer = styled("div")({
 });
 
 const inputStyles = {
-    width: "400px",
-    margin: "15px",
-    "& .MuiOutlinedInput-input": {
-      color: "white" // Set text color to white
+  width: "400px",
+  margin: "15px",
+  "& .MuiOutlinedInput-input": {
+    color: "white" // Set text color to white
+  },
+  "& .MuiInputLabel-root": {
+    color: "white" // Set hint label color to white
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "white",
+      borderWidth: "1.5px"
     },
-    "& .MuiInputLabel-root": {
-      color: "white" // Set hint label color to white
+    "&:hover fieldset": {
+      borderColor: "#504ABF"
     },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-        borderWidth: "1.5px"
-      },
-      "&:hover fieldset": {
-        borderColor: "#504ABF"
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white"
-      },
-      "& .MuiSvgIcon-root": {
-        color: "white" // Set icon color to white
-      }
+    "&.Mui-focused fieldset": {
+      borderColor: "white"
+    },
+    "& .MuiSvgIcon-root": {
+      color: "white" // Set icon color to white
     }
-  };
+  }
+};
 
 const GradientButton = styled(Button)({
   marginTop: "20px",
@@ -58,12 +63,11 @@ const GradientButton = styled(Button)({
   "&:active, &:focus": {
     outline: "none" // Remove outline on click/focus
   },
-  fontFamily: "hanbit-font",
+  fontFamily: "hanbit-font"
 });
 
 const StyledTextField = styled(TextField)(inputStyles);
 const PasswordInput = styled(TextField)(inputStyles);
-
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -79,6 +83,20 @@ const Signup = () => {
   });
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false); // 모달 오픈 상태
+  const [modalMessage, setModalMessage] = useState(""); // 모달 메시지 상태
+
+  const [signupSuccess, setSignupSuccess] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    //navigate("/login"); // 모달을 닫고 로그인 페이지로 이동
+    if (signupSuccess) {
+      navigate("/login"); // Redirect to login if signup was successful
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -86,7 +104,7 @@ const Signup = () => {
       [name]: value
     }));
 
-    // name이 confirmPassword인 입력필드 
+    // name이 confirmPassword인 입력필드
     // 비밀번호 확인란에 입력이 변경될 때마다 일치 여부 확인
     if (name === "confirmPassword") {
       if (formData.password !== value) {
@@ -96,7 +114,7 @@ const Signup = () => {
       }
     }
   };
-
+  /*
   const handleSignup = async () => {
     try {
       // 회원가입 데이터
@@ -108,26 +126,31 @@ const Signup = () => {
         gender: formData.gender,
         age: parseInt(formData.age)
       };
-      
+
       // 회원가입 요청 보내기
       const response = await signUp(userData);
 
       const message = response.message;
-      alert(message);
-      console.log('회원가입 성공:', response);
+      //alert(message);
+      setModalMessage("회원가입 성공! 로그인 페이지로 이동합니다."); // 성공 메시지 설정
+      handleOpen(); // 모달 오픈
+      console.log("회원가입 성공:", response);
       navigate("/login"); // 로그인 페이지로 이동
     } catch (error) {
-        const errorMessage = error.response.data.join("\n");
-        alert(errorMessage);
-      
+      const errorMessage = error.response.data.join("\n");
+      //alert(errorMessage);
+      setModalMessage(errorMessage); // 실패 메시지 설정
+      handleOpen();
+
       // 회원가입 실패 시 처리
       // console.error('회원가입 실패:', error);
       // alert(error);
       // 회원가입 실패 메시지 표시 등의 처리
     }
   };
-
-  const handleSubmit = (e) => {
+*/
+  const handleSubmit = async (e) => {
+    //handleOpen();
     e.preventDefault();
     // 모든 정보가 작성되었는지 확인
     if (
@@ -139,9 +162,37 @@ const Signup = () => {
       formData.age
     ) {
       // 회원가입 처리
-      handleSignup(); //서버에 데이터 전송할 함수 호출
+      //handleSignup(); //서버에 데이터 전송할 함수 호출
+      try {
+        // 회원가입 데이터
+        const userData = {
+          username: formData.id,
+          password: formData.password,
+          email: formData.email,
+          nickname: formData.nickname,
+          gender: formData.gender,
+          age: parseInt(formData.age)
+        };
+
+        // 회원가입 요청 보내기
+        const response = await signUp(userData);
+
+        const message = response.message;
+        //alert(message);
+        setModalMessage("회원가입 성공! 로그인 페이지로 이동합니다."); // 성공 메시지 설정
+        setSignupSuccess(true);
+        setOpen(true); // 모달 오픈
+        console.log("회원가입 성공:", response);
+        //navigate("/login"); // 로그인 페이지로 이동
+      } catch (error) {
+        const errorMessage = error.response.data.join("\n");
+        //alert(errorMessage);
+        setModalMessage(errorMessage); // 실패 메시지 설정
+        setOpen(true);
+      }
     } else {
-      alert("모든 정보를 입력해주세요.");
+      setModalMessage("모든 정보를 입력해주세요.");
+      setOpen(true);
     }
   };
 
@@ -200,11 +251,13 @@ const Signup = () => {
           type="password"
           value={formData.confirmPassword}
           onChange={handleChange}
-          inputProps={{ minLength: 8 }} 
-         />
-          {passwordError && ( // 비밀번호 일치 오류가 있을 때만 표시
-                    <p style={{ color: "hotpink", fontSize: "14px"  }}>비밀번호가 일치하지 않습니다. 다시 확인해주세요.</p>
-                )}
+          inputProps={{ minLength: 8 }}
+        />
+        {passwordError && ( // 비밀번호 일치 오류가 있을 때만 표시
+          <p style={{ color: "hotpink", fontSize: "14px" }}>
+            비밀번호가 일치하지 않습니다. 다시 확인해주세요.
+          </p>
+        )}
         <StyledTextField
           style={inputStyles}
           id="nickname"
@@ -216,7 +269,6 @@ const Signup = () => {
           inputProps={{ maxLength: 8 }} // 최대 길이 수정 -> 8자
         />
 
-        
         <StyledTextField
           style={inputStyles}
           id="email"
@@ -225,7 +277,7 @@ const Signup = () => {
           variant="outlined"
           type="email"
           value={formData.email}
-          onChange={handleChange}// 이메일 형식에 맞을 때만 입력되는 코드 넣기
+          onChange={handleChange} // 이메일 형식에 맞을 때만 입력되는 코드 넣기
         />
 
         <StyledTextField
@@ -251,6 +303,24 @@ const Signup = () => {
         <GradientButton variant="outlined" onClick={handleSubmit}>
           회원가입 완료
         </GradientButton>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogActions>
+            <IconButton
+              onClick={handleClose}
+              size="small"
+              sx={{
+                position: "absolute",
+                right: 5,
+                top: 1,
+                color: (theme) => theme.palette.grey[500],
+                padding: "3px"
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogActions>
+          <DialogContent>{modalMessage}</DialogContent>
+        </Dialog>
         <div className="SignupMessage">
           <a style={{ textDecoration: "none", color: "inherit" }}>
             이미 회원이신가요?

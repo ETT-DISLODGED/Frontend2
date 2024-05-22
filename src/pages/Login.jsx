@@ -13,6 +13,8 @@ import { login } from "../lib/api";
 import { useDispatch } from "react-redux";
 import { setToken, setRefreshToken } from "../redux/reducers/AuthReducer";
 
+import Dialog from "@mui/material/Dialog"; //모달용
+
 const CenteredContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
@@ -59,7 +61,7 @@ const GradientButton = styled(Button)({
   "&:active, &:focus": {
     outline: "none" // Remove outline on click/focus
   },
-  fontFamily: "hanbit-font",
+  fontFamily: "hanbit-font"
 });
 
 const StyledTextField = styled(TextField)(inputStyles);
@@ -95,13 +97,13 @@ const Login = () => {
       dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
       dispatch(setRefreshToken(response.token.refresh));
       const message = response.message;
-      alert(message);
+      //alert(message);
 
       navigate("/main");
     } catch (error) {
       console.error("로그인 실패:", error);
       // 로그인 실패 시 처리
-      window.alert("아이디 또는 비밀번호를 확인해주세요.");
+      alert("아이디 또는 비밀번호를 확인해주세요.");
     }
   };
 

@@ -13,6 +13,10 @@ import { jwtUtils } from "../util/jwtUtils";
 import { useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog"; //모달용
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import Button from "@mui/material/Button";
 
 import {
   deleteComment,
@@ -23,6 +27,18 @@ import {
 } from "../lib/api";
 
 const Detail = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    // 모달을 닫을 때 페이지 이동
+  };
+
+  const [modalMessage, setModalMessage] = useState("");
+
   const { id } = useParams();
   //console.log(id);
 
@@ -51,8 +67,7 @@ const Detail = () => {
   const maxLength = 300; //댓글 최대 300자
 
   const handleDeleteComment = async (id) => {
-    alert("댓글을 삭제하시겠습니까?");
-    //deleteComment(id); //app.jsx에서 정의
+    //alert("댓글을 삭제하시겠습니까?");
     await deleteComment(id);
 
     setCommentList((prevComments) =>
@@ -67,16 +82,15 @@ const Detail = () => {
 
   //게시글 삭제
   const handleDelete = async () => {
-    if (window.confirm("정말로 삭제하시겠습니까?")) {
-      //onRemove(id);
-      try {
-        await deletePost(id);
-        alert("삭제 완료");
-        navigate("/Forum");
-      } catch (error) {
-        console.error("게시글 삭제 실패", error);
-        alert("게시글 삭제 실패");
-      }
+    //handleOpen();
+    try {
+      await deletePost(id);
+      //alert("삭제 완료");
+      handleClose();
+      navigate("/Forum");
+    } catch (error) {
+      console.error("게시글 삭제 실패", error);
+      alert("게시글 삭제 실패");
     }
   };
 
@@ -210,7 +224,7 @@ const Detail = () => {
               >
                 수정
               </button>
-              <button className="remove" onClick={handleDelete}>
+              <button className="remove" onClick={handleOpen}>
                 삭제
               </button>
             </div>
@@ -247,6 +261,25 @@ const Detail = () => {
           dangerouslySetInnerHTML={{ __html: highlightComment }}
         />*/}
         {/*value로 comment1을 줌으로써 댓글 입력창란이 comment1의 상태대로 뜬다, 최대 300글자 입력*/}
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              정말로 삭제하시겠습니까?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>취소</Button>
+            <Button onClick={handleDelete} autoFocus>
+              삭제
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

@@ -3,6 +3,15 @@ import "../styles/MyVoice.css";
 import { UpdateVoice, voiceInfo, playVoice, voiceStatistic } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
+import Dialog from "@mui/material/Dialog"; //모달용
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 const Myvoice = () => {
   const navigate = useNavigate();
 
@@ -15,6 +24,14 @@ const Myvoice = () => {
   const [recommendType, setRecommendType] = useState();
   const [recommendSpeed, setRecommendSpeed] = useState(); //말 빠르기
   const [recommendPitch, setRecommendPitch] = useState(); //피치
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/", { replace: true }); // 모달을 닫을 때 페이지 이동
+  };
+  const [modalMessage, setModalMessage] = useState("");
 
   // 빠르기 선택 처리 함수
   const handleSpeedChange = (event) => {
@@ -42,10 +59,14 @@ const Myvoice = () => {
     };
     try {
       await UpdateVoice(postVoice);
-      alert("가상 보이스 생성 완료!");
-      navigate("/", { replace: true });
+      setModalMessage("가상 보이스 생성 완료!");
+      setOpen(true);
+      //alert("가상 보이스 생성 완료!");
+      //navigate("/", { replace: true });
     } catch (error) {
-      ("목소리 업데이트 실패");
+      console.error("목소리 업데이트 실패", error);
+      setModalMessage("목소리 업데이트 실패");
+      setOpen(true);
     }
   };
   //보이스 추천 정보 받아오기
@@ -223,6 +244,24 @@ const Myvoice = () => {
         <button className="save_voice" onClick={registerVoice}>
           저장하기
         </button>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogActions>
+            <IconButton
+              onClick={handleClose}
+              size="small"
+              sx={{
+                position: "absolute",
+                right: 5,
+                top: 1,
+                color: (theme) => theme.palette.grey[500],
+                padding: "3px"
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogActions>
+          <DialogContent>{modalMessage}</DialogContent>
+        </Dialog>
       </div>
     </div>
   );
