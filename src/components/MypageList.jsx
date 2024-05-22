@@ -7,9 +7,7 @@ const MypageList = ({ mypageList }) => {
       {mypageList.length > 0 ? (
         mypageList.map((post) => (
           <MypageItem
-            key={post.id}
             id={post.id}
-            created_at={post.created_at}
             tag={post.tag}
             picture={post.image_url}
             comments ={post.comment}
