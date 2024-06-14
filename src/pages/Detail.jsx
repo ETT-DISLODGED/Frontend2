@@ -1,12 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
-//import { DiaryStateContext } from "../App";
 
 import "../styles/Detail.css";
 
 import Comment from "./../components/comment";
-//import comment2 from "../../public/assets/comment2.png";
-//import { DiaryDispatchContext } from "./../App";
 import axios from "axios";
 
 import { jwtUtils } from "../util/jwtUtils";
@@ -40,16 +37,13 @@ const Detail = () => {
   const [modalMessage, setModalMessage] = useState("");
 
   const { id } = useParams();
-  //console.log(id);
 
   const token = useSelector((state) => state.Auth.token);
-  //console.log(jwtUtils.getNickname(token));
 
   const navigate = useNavigate();
-  const [data, setData] = useState(); //targetDiary 담을 state. useState를 이용해야 상태변화가 일어난다
+  const [data, setData] = useState(); //targetDiary 담을 state. useState를 이용해야 상태변화가 일어남
 
   //댓글 구현
-  //const [commentsList, setCommentsList] = useState(comments_list); // 댓글 리스트
   const [comment1, setComment1] = useState(""); //댓글 입력창 상태
   const [commentCount, setCommentCount] = useState(0); //게시글 댓글 갯수
 
@@ -57,7 +51,7 @@ const Detail = () => {
   // 필터링된 댓글 목록 상태
   const [filteredComments, setFilteredComments] = useState([]);
 
-  const [userNickname, setUserNickname] = useState(""); // 상태에 사용자의 닉네임을 저장한다고 가정 (로그인과 연결 전 임시 코드, 기술블로그 참고)
+  const [userNickname, setUserNickname] = useState("");
 
   const [userId, setUserId] = useState("");
 
@@ -67,7 +61,6 @@ const Detail = () => {
   const maxLength = 300; //댓글 최대 300자
 
   const handleDeleteComment = async (id) => {
-    //alert("댓글을 삭제하시겠습니까?");
     await deleteComment(id);
 
     setCommentList((prevComments) =>
@@ -82,10 +75,8 @@ const Detail = () => {
 
   //게시글 삭제
   const handleDelete = async () => {
-    //handleOpen();
     try {
       await deletePost(id);
-      //alert("삭제 완료");
       handleClose();
       navigate("/Forum");
     } catch (error) {
@@ -112,7 +103,7 @@ const Detail = () => {
     if (containBadWord) {
       setHighlightComment(modifiedText);
       alert("비속어가 포함된 댓글은 작성할 수 없습니다.");
-      return; // 함수 실행 중단*/
+      return; // 함수 실행 중단
     }
 
     const newComment = {
@@ -135,9 +126,6 @@ const Detail = () => {
     if (jwtUtils.isAuth(token)) {
       jwtUtils.getNickname(token).then(setUserNickname);
       setUserId(jwtUtils.getId(token));
-      //console.log(userId);
-      //jwtUtils.getUserId(token).then(setUserId);
-      //console.log(userId);
     }
   }, [token]);
 
@@ -255,12 +243,6 @@ const Detail = () => {
             {comment1.length}/{maxLength}
           </p>
         </div>
-        {/*밑줄쳐진 텍스트
-        <div
-          className="output"
-          dangerouslySetInnerHTML={{ __html: highlightComment }}
-        />*/}
-        {/*value로 comment1을 줌으로써 댓글 입력창란이 comment1의 상태대로 뜬다, 최대 300글자 입력*/}
 
         <Dialog
           open={open}

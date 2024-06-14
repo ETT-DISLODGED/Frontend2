@@ -71,7 +71,6 @@ const MypageItem = ({ id, tag, picture, comments }) => {
       if (!isClicked) initiatePlayList();
     } else {
       setOpen(true);
-      //alert("해당 게시글에 달린 댓글이 없습니다! 게시글로 이동합니다.");
       setModalMessage(
         "해당 게시글에 달린 댓글이 없습니다! 게시글로 이동합니다."
       );

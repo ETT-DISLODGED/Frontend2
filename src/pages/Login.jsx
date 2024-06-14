@@ -26,10 +26,10 @@ const inputStyles = {
   width: "400px",
   margin: "15px",
   "& .MuiOutlinedInput-input": {
-    color: "white" // Set text color to white
+    color: "white"
   },
   "& .MuiInputLabel-root": {
-    color: "white" // Set hint label color to white
+    color: "white"
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
@@ -43,7 +43,7 @@ const inputStyles = {
       borderColor: "white"
     },
     "& .MuiSvgIcon-root": {
-      color: "white" // Set icon color to white
+      color: "white"
     }
   }
 };
@@ -52,14 +52,14 @@ const inputStyles = {
 const GradientButton = styled(Button)({
   marginTop: "20px",
   width: "400px",
-  padding: "15px", // Adjust padding as needed
+  padding: "15px",
   color: "white",
-  background: "linear-gradient(45deg, #FF0A99 30%, #00FFF0 90%)", // Gradient effect
+  background: "linear-gradient(45deg, #FF0A99 30%, #00FFF0 90%)",
   "&:hover": {
     background: "linear-gradient(45deg, #FF0A99 60%, #00FFF0 90%)"
   },
   "&:active, &:focus": {
-    outline: "none" // Remove outline on click/focus
+    outline: "none"
   },
   fontFamily: "hanbit-font"
 });
@@ -73,7 +73,7 @@ const Login = () => {
   const [password, setPassword] = useState(""); // 비밀번호 상태 변수 추가
   const navigate = useNavigate(); //버전이 바뀌어서 useHistory 아니고 Navigate로
 
-  const dispatch = useDispatch(); //승현 추가
+  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -85,16 +85,15 @@ const Login = () => {
 
   const handleSignupClick = () => {
     // 회원가입 버튼 클릭 시 이벤트 핸들러
-    navigate("/signup"); // "/signup" 경로로 이동
+    navigate("/signup"); //
   };
 
   const handleLogin = async () => {
     try {
       // 로그인 요청 보내기
       const response = await login({ username, password });
-      //userInfo.user = response.user;
 
-      dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장 (승현이 추가)
+      dispatch(setToken(response.token.access)); //로그인 성공 시 토큰을 redux store에 저장
       dispatch(setRefreshToken(response.token.refresh));
       const message = response.message;
       //alert(message);

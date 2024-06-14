@@ -8,9 +8,6 @@ const DiaryItem = ({ id, title, content, created_at, commentCount }) => {
     year: "numeric",
     month: "long",
     day: "numeric"
-    //hour: "2-digit",
-    //minute: "2-digit",
-    //second: "2-digit"
   }); //사용자한테 보여줄때 toLocaleDateString 사용
 
   // content가 50자보다 길 경우, 앞의 50자만 표시하고 "..." 추가

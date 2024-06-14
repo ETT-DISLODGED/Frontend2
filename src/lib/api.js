@@ -11,20 +11,18 @@ const client = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
   headers: {
-    "Content-Type": "application/json" // 필요한 경우 헤더 추가
+    "Content-Type": "application/json"
   }
 });
 
 /**
  1. 요청 인터셉터
- 2개의 콜백 함수를 받습니다.
+ 2개의 콜백 함수를 받기.
  */
 client.interceptors.request.use(
   async (config) => {
     // HTTP Authorization 요청 헤더에 jwt-token을 넣음
     // 서버측 미들웨어에서 이를 확인하고 검증한 후 해당 API에 요청함.
-    //const dispatch = useDispatch();
-    //const navigate = useNavigate();
     console.log("Request Interceptor", config.url);
     const token = store.getState().Auth.token;
     try {
@@ -41,7 +39,7 @@ client.interceptors.request.use(
   },
   (error) => {
     console.log("Request Interceptor Error", error);
-    // 요청 에러 직전 호출됩니다.
+    // 요청 에러 직전 호출됨
     return Promise.reject(error);
   }
 );
@@ -72,14 +70,14 @@ export const newAccessToken = async (refreshToken) => {
 
 /**
  2. 응답 인터셉터
- 2개의 콜백 함수를 받습니다.
+ 2개의 콜백 함수를 받음.
  */
 client.interceptors.response.use(
   (response) => {
     /*
         http status가 200인 경우
-        응답 성공 직전 호출됩니다.
-        .then() 으로 이어집니다.
+        응답 성공 직전 호출됨.
+        .then() 으로 이어짐.
     */
     console.log("Response Interceptor", response.config.url);
     return response;
@@ -116,16 +114,9 @@ client.interceptors.response.use(
         // 새 Access Token을 받아오는데 실패한 경우
         console.error("Unable to refresh access token:", refreshError);
         throw refreshError;
-        // 추가적인 에러 처리를 여기에 작성할 수 있음
       }
     }
 
-    // 그 외의 에러 처리
-    /*
-        http status가 200이 아닌 경우
-        응답 에러 직전 호출됩니다.
-        .catch() 으로 이어집니다.
-    */
     return Promise.reject(error);
   }
 );

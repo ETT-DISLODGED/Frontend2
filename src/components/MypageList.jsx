@@ -10,7 +10,7 @@ const MypageList = ({ mypageList }) => {
             id={post.id}
             tag={post.tag}
             picture={post.image_url}
-            comments ={post.comment}
+            comments={post.comment}
           />
         ))
       ) : (

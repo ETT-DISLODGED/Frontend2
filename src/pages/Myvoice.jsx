@@ -61,8 +61,6 @@ const Myvoice = () => {
       await UpdateVoice(postVoice);
       setModalMessage("가상 보이스 생성 완료!");
       setOpen(true);
-      //alert("가상 보이스 생성 완료!");
-      //navigate("/", { replace: true });
     } catch (error) {
       console.error("목소리 업데이트 실패", error);
       setModalMessage("목소리 업데이트 실패");
@@ -82,15 +80,6 @@ const Myvoice = () => {
     setRecommendPitch(recommend_pitch.toFixed(0));
   };
 
-  /*
-  useEffect(() => {
-    console.log(`voiceType is now: ${voiceType}`);
-    console.log(`ssmlGender is now: ${ssmlGender}`);
-    console.log(speakingRate);
-    console.log(pitch);
-  }, [voiceType, ssmlGender, speakingRate, pitch]);
-*/
-
   const listenVoice = async () => {
     try {
       await playVoice(text, speed, pitch, type);
@@ -103,12 +92,10 @@ const Myvoice = () => {
     const getVoice = async () => {
       try {
         const { user_speed, user_pitch, user_type } = await voiceInfo();
-        //console.log(user_speed, user_pitch, user_type);
-        setSpeed(user_speed || 1.0); // Use || to provide a default value if user_speed is null
+        setSpeed(user_speed || 1.0);
         setPitch(user_pitch || 0.0);
 
-        // Ensure that the string value is set correctly
-        setType(user_type || "ko-KR-Standard-A"); // Use single quotes for string literals
+        setType(user_type || "ko-KR-Standard-A");
       } catch (error) {
         console.error("보이스 정보를 가져오는 중 오류가 발생했습니다:", error);
       }

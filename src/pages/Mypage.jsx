@@ -3,8 +3,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "../styles/Mypage.css";
 import MypageList from "../components/MypageList";
-import bgm1 from "/assets/perfect.mp3"; // Import background music file
-import bgm2 from "/assets/whispersof.mp3"; // Add more music files
+import bgm1 from "/assets/perfect.mp3";
+import bgm2 from "/assets/whispersof.mp3";
 import bgm3 from "/assets/onceinparis.mp3";
 import bgm4 from "/assets/sadpiano.mp3";
 import bgm5 from "/assets/loveserena.mp3";
@@ -12,7 +12,6 @@ import playIcon from "/assets/play2.png";
 import pauseIcon from "/assets/pause.png";
 import stopIcon from "/assets/stop.png";
 import soundIcon from "/assets/sound.png";
-// import musicIcon from "/assets/music.png";
 
 import { getMyForumPosts } from "../lib/api";
 import { getUser } from "../lib/api";
@@ -29,19 +28,17 @@ const Mypage = () => {
   const [userName, setUserName] = useState("Loading...");
   const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(0.5);
-  const [bgm, setBgm] = useState(bgm1); // State for selected BGM
-  const bgms = [bgm1, bgm2, bgm3, bgm4, bgm5]; // Array of available BGMS
+  const [bgm, setBgm] = useState(bgm1);
+  const bgms = [bgm1, bgm2, bgm3, bgm4, bgm5];
 
-  useEffect(() => {
-    // Existing effects
-  }, []);
+  useEffect(() => {}, []);
 
   const handleBgmChange = (event) => {
     const newBgm = event.target.value;
     setBgm(newBgm); // 새로운 BGM으로 상태 업데이트
     const audio = document.getElementById("bgm");
     audio.pause();
-    audio.load(); // 이 함수는 새로운 소스를 로드합니다
+    audio.load(); // 새로운 소스를 로드
     if (isPlaying) {
       audio.play(); // 새 트랙 재생
     }
@@ -85,29 +82,28 @@ const Mypage = () => {
 
   const logout = async () => {
     dispatch(setToken(""));
-    //alert("로그아웃 완료");
     navigate("/");
   };
   const togglePlay = () => {
     const audio = document.getElementById("bgm");
     if (isPlaying) {
-      audio.pause(); // Pause the music
+      audio.pause(); // Pause
     } else {
-      audio.play(); // Play the music
+      audio.play(); // Play
     }
-    setIsPlaying(!isPlaying); // Update the state
+    setIsPlaying(!isPlaying);
   };
 
   const stopMusic = () => {
     const audio = document.getElementById("bgm");
-    audio.pause(); // Stop the music
-    audio.currentTime = 0; // Reset the music
-    setIsPlaying(false); // Update the state
+    audio.pause(); // Stop
+    audio.currentTime = 0; // Reset
+    setIsPlaying(false);
   };
 
   const adjustVolume = (e) => {
     const audio = document.getElementById("bgm");
-    setVolume(parseFloat(e.target.value)); // Adjust the volume
+    setVolume(parseFloat(e.target.value)); // 볼륨 조절
     audio.volume = parseFloat(e.target.value);
   };
 

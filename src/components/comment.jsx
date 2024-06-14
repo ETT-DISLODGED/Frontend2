@@ -17,7 +17,6 @@ import Button from "@mui/material/Button";
 
 const Comment = ({ comments, deleteComment, post_id }) => {
   const token = useSelector((state) => state.Auth.token);
-  //const [userNickname, setUserNickname] = useState("");
   const [userId, setUserId] = useState("");
 
   const handleCommentPlay = async (content, speed, pitch, type) => {

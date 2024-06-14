@@ -1,10 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-//import { DiaryStateContext } from "../App";
 import "../styles/forum.css";
 import DiaryList from "../components/DiaryList";
 import { groups } from "../util/group";
-//import { CommentsContext } from "../App";
 import axios from "axios";
 import { getForumPosts } from "../lib/api";
 
@@ -12,12 +10,8 @@ import Pagination from "react-js-pagination";
 
 import { jwtUtils } from "../util/jwtUtils";
 import { useSelector } from "react-redux";
-// 카테고리 목록을 상수로 선언
-//const categories = ["진로", "연애", "가족/친구", "기타"];
 
 const Forum = () => {
-  //const diaryList = useContext(DiaryStateContext);
-
   const token = useSelector((state) => state.Auth.token);
 
   const [searchParams, setSearchParams] = useSearchParams(); //페이지네이션 위해
@@ -34,7 +28,6 @@ const Forum = () => {
   const [postList, setPostList] = useState([]);
 
   const navigate = useNavigate();
-  //const { commentsList } = useContext(CommentsContext);
 
   // 현재 선택된 카테고리를 상태로 관리
   const [activeGroup, setActiveGroup] = useState(
@@ -52,13 +45,6 @@ const Forum = () => {
     setSearchParams({ group: groupName, page: pageNumber });
   };
 
-  /* useEffect(() => {
-    if (diaryList.length >= 1) {
-      setData(diaryList);
-    }
-    setPageCount(Math.ceil(filteredDiary.length / 6));
-  }, [diaryList]); */
-
   useEffect(() => {
     const getPostList = async () => {
       try {
@@ -66,7 +52,6 @@ const Forum = () => {
           activeGroup,
           page
         );
-        //api.js로 getForumPosts()를 옮겼어욥 ******* 0227
         setPostList(postWithComments);
         setPageCount(Math.ceil(totalCount / 6));
       } catch (error) {
@@ -76,20 +61,6 @@ const Forum = () => {
     getPostList();
   }, [searchParams, activeGroup, page]);
 
-  // 현재 선택된 카테고리에 따라 게시글 필터링
-  //const filteredDiary = postList.filter((data) => data.group === activeGroup);
-
-  /*
-  // Forum 컴포넌트 내에서 각 게시글의 댓글 수를 계산하는 함수(postId(post) 이용)
-  const getCommentCount = (post) => {
-    return commentsList.filter((comment) => comment.post === post).length;
-  };
-  // 게시글 데이터에 댓글 수를 추가하여 업데이트합니다
-  const diaryListWithComments = postList.map((diary) => ({
-    ...diary,
-    commentCount: getCommentCount(diary.id)
-  }));
-*/
   return (
     <div className="forum">
       <div className="forum-intro">
@@ -123,7 +94,6 @@ const Forum = () => {
           activePage={Number(page)}
           itemsCountPerPage={6}
           totalItemsCount={pageCount * 6}
-          //totalItemsCount={itemsNum}
           pageRangeDisplayed={5}
           prevPageText={"‹"}
           nextPageText={"›"}

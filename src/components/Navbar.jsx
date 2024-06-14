@@ -41,7 +41,7 @@ const Navbar = () => {
         <div className="button-container">
           {isLoggedIn ? (
             <div className="ProfileButton" onClick={navigateToMyPage}>
-              <PersonIcon sx={{ fontSize: 34, color: "white" }} /> {/* 여기서 크기 설정 */}
+              <PersonIcon sx={{ fontSize: 34, color: "white" }} />
             </div>
           ) : (
             <div className="LoginButton">

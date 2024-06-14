@@ -3,12 +3,9 @@ import "../styles/DiaryEditor.css";
 import { getStringDate } from "../util/date";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef, useContext, useEffect } from "react";
-//import { DiaryDispatchContext } from "./../App";
 import { groups } from "../util/group";
 import axios from "axios";
 import { createDiary, updateDiary } from "../lib/api";
-
-//const categories = ["진로", "연애", "가족/친구", "기타"]; // 카테고리 배열
 
 const DiaryEditor = ({ isEdit, originData }) => {
   const navigate = useNavigate();
@@ -18,13 +15,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
       year: "numeric",
       month: "long",
       day: "numeric"
-      //hour: "2-digit",
-      //minute: "2-digit",
-      //second: "2-digit"
     })
   );
   const [updated_at, setUpdated_at] = useState(created_at);
-  //const [date, setDate] = useState(formattedDate);
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
   const [group, setGroup] = useState("");
@@ -33,7 +26,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
 
   const tagRef = useRef();
   const titleRef = useRef();
-  const contentRef = useRef(); //작성 안되었을 때 contentArea에 focus 주려고
+  const contentRef = useRef(); //작성 안되었을 때 contentArea에 focus
 
   // tag 입력 처리
   const handleTagChange = (e) => {
@@ -76,8 +69,6 @@ const DiaryEditor = ({ isEdit, originData }) => {
     return true;
   };
 
-  //const { onCreate, onEdit } = useContext(DiaryDispatchContext);
-
   const handleSubmit = async () => {
     if (!validateInput(tagRef, tagRef.current.value, "태그를 작성해주세요!"))
       return;
@@ -103,26 +94,16 @@ const DiaryEditor = ({ isEdit, originData }) => {
       level,
       content
     };
-    /*
-    if (
-      window.confirm(
-        isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?"
-      )
-    )*/
+
     try {
       if (!isEdit) {
-        //onCreate(tag, title, group, level, content);
         await createDiary(postData);
-        //alert("작성 완료");
       } else {
         await updateDiary(originData.id, postData);
-
-        //alert("수정 완료");
       }
       navigate("/", { replace: true });
     } catch (error) {
       console.error("게시글 작성/수정에 실패", error);
-      //alert("게시글 작성/수정에 실패");
     }
   };
 
@@ -133,9 +114,6 @@ const DiaryEditor = ({ isEdit, originData }) => {
           year: "numeric",
           month: "long",
           day: "numeric"
-          //hour: "2-digit",
-          //minute: "2-digit",
-          //second: "2-digit"
         })
       );
       setUpdated_at(originData.updated_at);
